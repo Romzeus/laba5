@@ -4,21 +4,23 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
+import labs.util.io.*;
+import labs.util.io.Scanner;
+
 public class ArgumentParser {
-    private static final Scanner scanner = new Scanner(System.in);
+    private static Printer printer = new ConsolePrinter();
+    private static labs.util.io.Scanner consoleScanner = new ConsoleScanner();
     private static Deque<String> arguments;
     public static void parse() {
-        parseString(scanner.nextLine());
+        parseString(consoleScanner.scan());
     }
     public static void parseFile(String filepath) throws IOException {
-        try(InputStreamReader input = new InputStreamReader(new FileInputStream(filepath))) {
-            Scanner fileScanner = new Scanner(input);
-            String result = "";
-            while(fileScanner.hasNext()) {
-                result = result.concat(" ").concat(fileScanner.next());
-            }
+        try {
+            Scanner fileScanner = new FileScanner(filepath);
+            String result = fileScanner.scan();
             parseString(result);
-            } catch(IOException exception) {
+        } catch(IOException exception) {
+            printer.print("Нет такого файла");
             throw exception;
         }
     }

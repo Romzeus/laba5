@@ -6,7 +6,8 @@ public class Help extends Command{
     }
     @Override
     public void execute() {
-        for(Command command : Invoker.getCommands().values())
-            System.out.println(command.describe());
+        for(Executable command : Invoker.getCommands().values())
+            if(command instanceof Command)
+                System.out.println(((Command)command).describe());
     }
 }

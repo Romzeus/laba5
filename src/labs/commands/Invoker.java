@@ -2,17 +2,9 @@ package labs.commands;
 import java.util.HashMap;
 import java.util.Map;
 import labs.util.ActionLogger;
-import labs.util.io.Printer;
-import labs.util.io.Scanner;
 
 public class Invoker {
-    private final Printer logger;
-    private final Scanner scanner;
     private static final HashMap<String, Executable> commands;
-    public Invoker(Printer logger, Scanner scanner) {
-        this.logger = logger;
-        this.scanner = scanner;
-    }
     public static void activate(String commandName) {
         if (commands.containsKey(commandName)){
             commands.get(commandName).execute();
