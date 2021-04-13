@@ -1,15 +1,12 @@
 package labs.util;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
-
 import labs.util.io.*;
 import labs.util.io.Scanner;
 
 public class ArgumentParser {
-    private static Printer printer = new ConsolePrinter();
-    private static labs.util.io.Scanner consoleScanner = new ConsoleScanner();
+    private static final Printer printer = new ConsolePrinter();
+    private static final labs.util.io.Scanner consoleScanner = new ConsoleScanner();
     private static Deque<String> arguments;
     public static void parse() {
         parseString(consoleScanner.scan());
