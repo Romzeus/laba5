@@ -26,16 +26,11 @@ public class Main {
         invoker.addCommand("remove_lower", new RemoveLower());
         invoker.addCommand("filter_starts_with_name", new StartsWith(consolePrinter));
         invoker.addCommand("filter_less_than_distance", new FilterDistance());
-        invoker.addCommand("help", new Help(invoker.getCommands().values()));
         ArgumentParser.setScanner(consoleScanner);
         ArgumentParser.setPrinter(consolePrinter);
-        FilePrinter filePrinter = new FilePrinter(consolePrinter);
-        try {
-            filePrinter.changeFile(System.getenv("SERIALIZED_COLLECTION").replace("\\", "\\\\"));
-        } catch(IOException exception) {
-            consolePrinter.print("Произошла ошибка при открытии файла");
-        }
+        FilePrinter filePrinter = new FilePrinter(consolePrinter, System.getenv("SERIALIZED_COLLECTION").replace("\\", "\\\\"));
         invoker.addCommand("save", new Save(filePrinter));
+        invoker.addCommand("help", new Help(invoker.getCommands().values()));
         ArrayDequeLoader.setPrinter(consolePrinter);
         ArrayDequeLoader.load();
         while(true) {

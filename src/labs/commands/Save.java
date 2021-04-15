@@ -14,6 +14,6 @@ public class Save extends Command{
     public void execute() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String result = gson.toJson(ArrayDequeManager.getArrayDeque());
-        filePrinter.print(result);
+        filePrinter.print(result + "\n");
     }
 }
