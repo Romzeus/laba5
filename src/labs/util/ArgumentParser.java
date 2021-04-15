@@ -1,19 +1,20 @@
 package labs.util;
 import java.io.IOException;
-import java.util.*;
+import java.util.Deque;
+import java.util.ArrayDeque;
+import java.util.Arrays;
 import labs.util.io.*;
-import labs.util.io.Scanner;
 
 public class ArgumentParser {
-    private static final Printer printer = new ConsolePrinter();
-    private static final labs.util.io.Scanner consoleScanner = new ConsoleScanner();
-    private static Deque<String> arguments;
+    private static Printer printer = new ConsolePrinter();
+    private static Scanner scanner = new ConsoleScanner();
+    private static Deque<String> arguments = new ArrayDeque<>();
     public static void parse() {
-        parseString(consoleScanner.scan());
+        parseString(scanner.scan());
     }
     public static void parseFile(String filepath) throws IOException {
         try {
-            Scanner fileScanner = new FileScanner(filepath);
+            FileScanner fileScanner = new FileScanner(filepath);
             String result = fileScanner.scan();
             parseString(result);
         } catch(IOException exception) {
@@ -33,6 +34,12 @@ public class ArgumentParser {
     }
     public static boolean hasNext() {
         return !arguments.isEmpty();
+    }
+    public static void setPrinter(Printer printer) {
+        ArgumentParser.printer = printer;
+    }
+    public static void setScanner(Scanner scanner) {
+        ArgumentParser.scanner = scanner;
     }
     public static void prepare() {
         if(hasNext())

@@ -8,6 +8,8 @@ public class Head extends Command{
     }
     @Override
     public void execute() {
+        if(ArrayDequeManager.getArrayDeque().isEmpty())
+            return;
         System.out.println(ArrayDequeManager.getArrayDeque().getFirst().toString());
     }
 }

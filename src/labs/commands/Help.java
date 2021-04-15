@@ -3,10 +3,10 @@ package labs.commands;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class Help extends Command{
+public class Help implements Executable{
     private final Collection<Executable> commands;
     public Help(Collection<Executable> commands) {
-        super("help", "Выводит справку по доступным командам");
+//        super("help", "Выводит справку по доступным командам");
         this.commands = commands;
     }
     @Override
@@ -15,8 +15,9 @@ public class Help extends Command{
         Executable temp;
         while(iterator.hasNext()) {
             temp = iterator.next();
-            if(temp instanceof Command)
-                System.out.println(((Command)iterator.next()).describe());
+            if (temp instanceof Command){
+                System.out.println(((Command)temp).describe());
+            }
         }
     }
 }

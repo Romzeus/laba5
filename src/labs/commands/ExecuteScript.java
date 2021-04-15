@@ -5,8 +5,10 @@ import labs.util.ArgumentParser;
 import java.io.IOException;
 
 public class ExecuteScript extends Command{
-    public ExecuteScript() {
+    private final Invoker invoker;
+    public ExecuteScript(Invoker invoker) {
         super("execute_script", "Считывает и исполняет скрипт из файла");
+        this.invoker = invoker;
     }
     @Override
     public void execute() {
@@ -18,7 +20,7 @@ public class ExecuteScript extends Command{
             ArgumentParser.clear();
         } finally {
             while(ArgumentParser.hasNext()) {
-                Invoker.activate(ArgumentParser.getArgument());
+                invoker.activate(ArgumentParser.getArgument());
             }
         }
     }

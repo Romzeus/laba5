@@ -1,10 +1,13 @@
 package labs.commands;
 import labs.structures.Route;
 import labs.util.ArrayDequeManager;
+import labs.util.io.Printer;
 
 public class Show extends Command{
-    public Show() {
+    private Printer printer;
+    public Show(Printer printer) {
         super("show", "Выводит элементы коллекции в строковом представлении");
+        this.printer = printer;
     }
     @Override
     public void execute() {

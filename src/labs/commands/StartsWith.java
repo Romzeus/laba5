@@ -3,12 +3,15 @@ package labs.commands;
 import labs.structures.Route;
 import labs.util.ArgumentParser;
 import labs.util.ArrayDequeManager;
+import labs.util.io.Printer;
 
 import java.util.Iterator;
 
 public class StartsWith extends Command{
-    public StartsWith() {
+    private Printer printer;
+    public StartsWith(Printer printer) {
         super("filter_starts_with_name", "Выводит элементы, значение поля name которых начинается с заданной подстроки");
+        this.printer = printer;
     }
     @Override
     public void execute() {
@@ -18,7 +21,7 @@ public class StartsWith extends Command{
         while(iterator.hasNext()) {
             current = iterator.next();
             if(current.getName().startsWith(name))
-                System.out.println(current.toString());
+                printer.print(current.toString());
         }
     }
 }

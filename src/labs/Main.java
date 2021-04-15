@@ -10,39 +10,36 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
+        ConsoleScanner consoleScanner = new ConsoleScanner();
+        ConsolePrinter consolePrinter = new ConsolePrinter();
         Invoker invoker = new Invoker();
         invoker.addCommand("exit", new Exit());
         invoker.addCommand("add", new Add());
         invoker.addCommand("clear", new Clear());
-        invoker.addCommand("show", new Show());
+        invoker.addCommand("show", new Show(consolePrinter));
         invoker.addCommand("print_descending", new PrintDescending());
-        invoker.addCommand("save", new Save(new FilePrinter(new ConsolePrinter())));
         invoker.addCommand("remove_by_id", new RemoveId());
         invoker.addCommand("head", new Head());
         invoker.addCommand("history", new History());
-        invoker.addCommand("execute_script", new ExecuteScript());
+        invoker.addCommand("execute_script", new ExecuteScript(invoker));
         invoker.addCommand("info", new Info());
         invoker.addCommand("remove_lower", new RemoveLower());
-        invoker.addCommand("filter_starts_with_name", new StartsWith());
+        invoker.addCommand("filter_starts_with_name", new StartsWith(consolePrinter));
         invoker.addCommand("filter_less_than_distance", new FilterDistance());
         invoker.addCommand("help", new Help(invoker.getCommands().values()));
-        ConsoleScanner consoleScanner = new ConsoleScanner();
-        ConsolePrinter consolePrinter = new ConsolePrinter();
+        ArgumentParser.setScanner(consoleScanner);
+        ArgumentParser.setPrinter(consolePrinter);
         FilePrinter filePrinter = new FilePrinter(consolePrinter);
-        int flag = 0;
-        while(flag == 0) {
-            consolePrinter.print("Введите название переменной среды: ");
-            flag = 1;
-            try {
-                filePrinter.changeFile(System.getenv(consoleScanner.scan().toUpperCase()).replace("\\", "\\\\"));
-            } catch(IOException exception) {
-                consolePrinter.print(exception.getMessage());
-                flag = 0;
-            }
+        try {
+            filePrinter.changeFile(System.getenv("SERIALIZED_COLLECTION").replace("\\", "\\\\"));
+        } catch(IOException exception) {
+            consolePrinter.print("Произошла ошибка при открытии файла");
         }
+        invoker.addCommand("save", new Save(filePrinter));
+        ArrayDequeLoader.setPrinter(consolePrinter);
         ArrayDequeLoader.load();
         while(true) {
-            ArgumentParser.parse();
+            ArgumentParser.prepare();
             try {
                 invoker.activate(ArgumentParser.getArgument());
             } catch(IllegalArgumentException exception) {
