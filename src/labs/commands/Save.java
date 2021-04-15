@@ -1,23 +1,19 @@
 package labs.commands;
 import com.google.gson.Gson;
-import labs.util.ArrayDequeLoader;
+import com.google.gson.GsonBuilder;
 import labs.util.ArrayDequeManager;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import labs.util.io.FilePrinter;
 
 public class Save extends Command{
-    public Save() {
+    private final FilePrinter filePrinter;
+    public Save(FilePrinter filePrinter) {
         super("save", "Сохраняет коллекцию в json-файл");
+        this.filePrinter = filePrinter;
     }
     @Override
     public void execute() {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String result = gson.toJson(ArrayDequeManager.getArrayDeque());
-        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(ArrayDequeLoader.filepath))) {
-            bufferedWriter.write(result + "\n");
-        } catch (IOException exception) {
-            System.out.println(exception.toString());
-        }
+        filePrinter.print(result);
     }
 }

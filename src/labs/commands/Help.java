@@ -1,13 +1,22 @@
 package labs.commands;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 public class Help extends Command{
-    public Help() {
+    private final Collection<Executable> commands;
+    public Help(Collection<Executable> commands) {
         super("help", "Выводит справку по доступным командам");
+        this.commands = commands;
     }
     @Override
     public void execute() {
-        for(Executable command : Invoker.getCommands().values())
-            if(command instanceof Command)
-                System.out.println(((Command)command).describe());
+        Iterator<Executable> iterator = commands.iterator();
+        Executable temp;
+        while(iterator.hasNext()) {
+            temp = iterator.next();
+            if(temp instanceof Command)
+                System.out.println(((Command)iterator.next()).describe());
+        }
     }
 }

@@ -26,7 +26,7 @@ public class ArgumentParser {
     }
     public static String getArgument() {
         String result = arguments.poll();
-        return (result.equals("") ? null : result);
+        return (result != null ? (result.equals("") ? null : result) : null);
     }
     public static void clear() {
         arguments.clear();

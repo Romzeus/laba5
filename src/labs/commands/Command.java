@@ -1,14 +1,14 @@
 package labs.commands;
 
 public abstract class Command implements Executable{
-    private final String describtion;
+    private final String description;
     private final String name;
-    public Command(String name, String describtion) {
+    public Command(String name, String description) {
         this.name = name;
-        this.describtion = describtion;
+        this.description = description;
     }
     public abstract void execute();
     public final String describe() {
-        return name + ": " + describtion;
+        return name + ": " + description;
     }
 }

@@ -19,9 +19,10 @@ public class ArrayDequeLoader {
     public static void load() {
         try(InputStreamReader in = new InputStreamReader(new FileInputStream(filepath))) {
             ArrayDeque<Route> arrayDeque = deserialize(in);
-            for(Route route : arrayDeque)
+            for (Route route : arrayDeque) {
                 ArrayDequeManager.addElement(route);
-        } catch(IOException e) {
+            }
+        } catch(IOException|NullPointerException e) {
             System.err.println(e.toString());
         } finally {
             initTime = LocalDate.now();
