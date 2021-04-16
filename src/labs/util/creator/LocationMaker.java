@@ -1,8 +1,8 @@
 package labs.util.creator;
-import labs.structures.from.Location;
+import labs.structures.Location;
 import labs.util.ArgumentParser;
 
-public class FromLocationMaker extends Creator<Location> {
+public class LocationMaker extends Creator<Location> {
     public Location make() {
         System.out.println("Введите координату x пункта отправки");
         ArgumentParser.prepare();

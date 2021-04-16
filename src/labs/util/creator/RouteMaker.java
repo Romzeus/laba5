@@ -3,13 +3,11 @@ import labs.structures.*;
 import labs.util.ArgumentParser;
 
 public class RouteMaker extends Creator<Route> {
-    private CoordinatesMaker coordinatesMaker;
-    private FromLocationMaker fromLocationMaker;
-    private ToLocationMaker toLocationMaker;
+    private final CoordinatesMaker coordinatesMaker;
+    private final LocationMaker locationMaker;
     public RouteMaker() {
         coordinatesMaker = new CoordinatesMaker();
-        fromLocationMaker = new FromLocationMaker();
-        toLocationMaker = new ToLocationMaker();
+        locationMaker = new LocationMaker();
     }
     @Override
     public Route make() {
@@ -39,8 +37,7 @@ public class RouteMaker extends Creator<Route> {
             }
         }
         Coordinates coordinates = coordinatesMaker.make();
-        labs.structures.from.Location fromLocation = fromLocationMaker.make();
-        labs.structures.to.Location toLocation = toLocationMaker.make();
-        return Route.RouteInitializer.createRoute(name, coordinates, fromLocation, toLocation, distance);
+        Location fromLocation = locationMaker.make();
+        return Route.RouteInitializer.createRoute(name, coordinates, fromLocation, distance);
     }
 }

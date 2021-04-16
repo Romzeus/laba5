@@ -6,8 +6,6 @@ import labs.util.io.ConsolePrinter;
 import labs.util.io.ConsoleScanner;
 import labs.util.io.FilePrinter;
 
-import java.io.IOException;
-
 public class Main {
     public static void main(String[] args) {
         ConsoleScanner consoleScanner = new ConsoleScanner();
@@ -38,7 +36,7 @@ public class Main {
             try {
                 invoker.activate(ArgumentParser.getArgument());
             } catch(IllegalArgumentException exception) {
-                System.out.println("Некорректная команда");
+                consolePrinter.print("Некорректная команда");
             }
         }
     }
