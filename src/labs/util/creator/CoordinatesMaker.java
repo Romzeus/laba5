@@ -1,6 +1,5 @@
 package labs.util.creator;
 import labs.structures.Coordinates;
-import labs.util.ArgumentParser;
 import labs.util.ArgumentProvider;
 import labs.util.io.Printer;
 
@@ -36,6 +35,6 @@ public class CoordinatesMaker extends Creator<Coordinates>{
                 printer.print("Координата y не может быть пустой или не числом. Попробуйте ввести координату y еще раз: ");
             }
         }
-        return Coordinates.CoordinatesInitializer.createCoordinates(x, y);
+        return new Coordinates(x, y);
     }
 }

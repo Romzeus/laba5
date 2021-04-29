@@ -6,8 +6,8 @@ import labs.util.io.Printer;
 public class RouteMaker extends Creator<Route> {
     private final CoordinatesMaker coordinatesMaker;
     private final LocationMaker locationMaker;
-    private ArgumentProvider argumentProvider;
-    private Printer printer;
+    private final ArgumentProvider argumentProvider;
+    private final Printer printer;
     public RouteMaker(ArgumentProvider argumentProvider, Printer printer) {
         coordinatesMaker = new CoordinatesMaker(argumentProvider, printer);
         locationMaker = new LocationMaker(argumentProvider, printer);
@@ -40,6 +40,6 @@ public class RouteMaker extends Creator<Route> {
         }
         Coordinates coordinates = coordinatesMaker.make();
         Location fromLocation = locationMaker.make();
-        return Route.RouteInitializer.createRoute(name, coordinates, fromLocation, distance);
+        return new Route(name, coordinates, fromLocation, distance);
     }
 }

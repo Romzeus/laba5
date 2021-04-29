@@ -3,8 +3,8 @@ import java.util.HashMap;
 import java.util.Map;
 import labs.util.ActionLogger;
 
-public class Invoker {
-    private HashMap<String, Executable> commands = new HashMap<>();
+public class Invoker implements Executor{
+    private final HashMap<String, Executable> commands = new HashMap<>();
     public void activate(String commandName) {
         if (commands.containsKey(commandName)){
             commands.get(commandName).execute();

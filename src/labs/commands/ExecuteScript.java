@@ -1,6 +1,5 @@
 package labs.commands;
 
-import labs.util.ArgumentParser;
 import labs.util.ArgumentProvider;
 import labs.util.FileArgumentParser;
 import labs.util.io.ConsolePrinter;
@@ -8,11 +7,11 @@ import labs.util.io.FileScanner;
 import java.io.IOException;
 
 public class ExecuteScript extends Command{
-    private final Invoker invoker;
+    private final Executor invoker;
     private ArgumentProvider argumentProvider;
-    public ExecuteScript(Invoker invoker) {
+    public ExecuteScript(Executor executor) {
         super("execute_script", "Считывает и исполняет скрипт из файла");
-        this.invoker = invoker;
+        this.invoker = executor;
     }
     @Override
     public void execute() {

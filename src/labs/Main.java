@@ -25,6 +25,7 @@ public class Main {
         invoker.addCommand("remove_lower", new RemoveLower(argumentParser));
         invoker.addCommand("filter_starts_with_name", new StartsWith(argumentParser, consolePrinter));
         invoker.addCommand("filter_less_than_distance", new FilterDistance(argumentParser, consolePrinter));
+        invoker.addCommand("update", new UpdateId(argumentParser, consolePrinter));
         argumentParser.setScanner(consoleScanner);
         argumentParser.setPrinter(consolePrinter);
         FilePrinter filePrinter = new FilePrinter(consolePrinter, System.getenv("SERIALIZED_COLLECTION").replace("\\", "\\\\"));

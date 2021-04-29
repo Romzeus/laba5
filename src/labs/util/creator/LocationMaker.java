@@ -1,12 +1,11 @@
 package labs.util.creator;
 import labs.structures.Location;
-import labs.util.ArgumentParser;
 import labs.util.ArgumentProvider;
 import labs.util.io.Printer;
 
 public class LocationMaker extends Creator<Location> {
-    private ArgumentProvider argumentProvider;
-    private Printer printer;
+    private final ArgumentProvider argumentProvider;
+    private final Printer printer;
     public LocationMaker(ArgumentProvider argumentProvider, Printer printer) {
         this.argumentProvider = argumentProvider;
         this.printer = printer;
@@ -45,6 +44,6 @@ public class LocationMaker extends Creator<Location> {
                 printer.print("Название пункта отправки не может быть пустым. Попробуйте ввести название еще раз: ");
             }
         }
-        return Location.LocationInitializer.createLocation(x, y, name);
+        return new Location(x, y, name);
     }
 }
