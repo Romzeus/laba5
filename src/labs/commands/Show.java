@@ -13,10 +13,10 @@ public class Show extends Command{
     public void execute() {
         try {
             for (Route route : ArrayDequeManager.getArrayDeque()) {
-                System.out.println(route.toString());
+                printer.print(route.toString());
             }
         } catch(NullPointerException e) {
-            System.err.println(e.toString());
+            printer.print(e.toString());
         }
     }
 }

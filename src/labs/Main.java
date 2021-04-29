@@ -11,30 +11,30 @@ public class Main {
         ConsoleScanner consoleScanner = new ConsoleScanner();
         ConsolePrinter consolePrinter = new ConsolePrinter();
         Invoker invoker = new Invoker();
+        ArgumentParser argumentParser = new ArgumentParser();
         invoker.addCommand("exit", new Exit());
-        invoker.addCommand("add", new Add());
+        invoker.addCommand("add", new Add(argumentParser));
         invoker.addCommand("clear", new Clear());
         invoker.addCommand("show", new Show(consolePrinter));
-        invoker.addCommand("print_descending", new PrintDescending());
-        invoker.addCommand("remove_by_id", new RemoveId());
-        invoker.addCommand("head", new Head());
-        invoker.addCommand("history", new History());
+        invoker.addCommand("print_descending", new PrintDescending(consolePrinter));
+        invoker.addCommand("remove_by_id", new RemoveId(argumentParser, consolePrinter));
+        invoker.addCommand("head", new Head(consolePrinter));
+        invoker.addCommand("history", new History(consolePrinter));
         invoker.addCommand("execute_script", new ExecuteScript(invoker));
-        invoker.addCommand("info", new Info());
-        invoker.addCommand("remove_lower", new RemoveLower());
-        invoker.addCommand("filter_starts_with_name", new StartsWith(consolePrinter));
-        invoker.addCommand("filter_less_than_distance", new FilterDistance());
-        ArgumentParser.setScanner(consoleScanner);
-        ArgumentParser.setPrinter(consolePrinter);
+        invoker.addCommand("info", new Info(consolePrinter));
+        invoker.addCommand("remove_lower", new RemoveLower(argumentParser));
+        invoker.addCommand("filter_starts_with_name", new StartsWith(argumentParser, consolePrinter));
+        invoker.addCommand("filter_less_than_distance", new FilterDistance(argumentParser, consolePrinter));
+        argumentParser.setScanner(consoleScanner);
+        argumentParser.setPrinter(consolePrinter);
         FilePrinter filePrinter = new FilePrinter(consolePrinter, System.getenv("SERIALIZED_COLLECTION").replace("\\", "\\\\"));
         invoker.addCommand("save", new Save(filePrinter));
-        invoker.addCommand("help", new Help(invoker.getCommands().values()));
+        invoker.addCommand("help", new Help(invoker.getCommands().values(), consolePrinter));
         ArrayDequeLoader.setPrinter(consolePrinter);
         ArrayDequeLoader.load();
         while(true) {
-            ArgumentParser.prepare();
             try {
-                invoker.activate(ArgumentParser.getArgument());
+                invoker.activate(argumentParser.getArgument());
             } catch(IllegalArgumentException exception) {
                 consolePrinter.print("Некорректная команда");
             }

@@ -1,6 +1,6 @@
 package labs.structures;
-import labs.util.IdGenerator;
 
+import labs.util.IdGenerator;
 import java.time.LocalDate;
 
 public class Route implements Comparable<Route>{

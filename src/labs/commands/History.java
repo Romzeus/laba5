@@ -1,18 +1,21 @@
 package labs.commands;
 
 import labs.util.ActionLogger;
+import labs.util.io.Printer;
 
 import java.util.Iterator;
 
 public class History extends Command{
-    public History() {
+    private Printer printer;
+    public History(Printer printer) {
         super("history", "Выводит последние 15 команд без их аргументов");
+        this.printer = printer;
     }
     @Override
     public void execute() {
         Iterator<String> iterator = ActionLogger.getHistory().descendingIterator();
         while(iterator.hasNext()) {
-            System.out.println(iterator.next());
+            printer.print(iterator.next());
         }
     }
 }

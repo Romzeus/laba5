@@ -1,45 +1,48 @@
 package labs.util.creator;
 import labs.structures.Location;
 import labs.util.ArgumentParser;
+import labs.util.ArgumentProvider;
+import labs.util.io.Printer;
 
 public class LocationMaker extends Creator<Location> {
+    private ArgumentProvider argumentProvider;
+    private Printer printer;
+    public LocationMaker(ArgumentProvider argumentProvider, Printer printer) {
+        this.argumentProvider = argumentProvider;
+        this.printer = printer;
+    }
     public Location make() {
-        System.out.println("Введите координату x пункта отправки");
-        ArgumentParser.prepare();
+        printer.print("Введите координату x пункта отправки");
         Double x = null;
         while (x == null) {
             try {
-            x = Double.parseDouble(ArgumentParser.getArgument());
+            x = Double.parseDouble(argumentProvider.getArgument());
             } catch(NullPointerException|NumberFormatException exception) {
-                System.out.println(exception.toString());
+                printer.print(exception.toString());
                 x = null;
             }
             if (x == null) {
-                System.out.println("Координата x пункта отправки не может быть пустой или не числом. Попробуйте ввести координату x еще раз: ");
-                ArgumentParser.prepare();
+                printer.print("Координата x пункта отправки не может быть пустой или не числом. Попробуйте ввести координату x еще раз: ");
             }
         }
-        System.out.println("Введите координату y пункта отправки: ");
-        ArgumentParser.prepare();
+        printer.print("Введите координату y пункта отправки: ");
         int y;
         try {
-            y = Integer.parseInt(ArgumentParser.getArgument());
+            y = Integer.parseInt(argumentProvider.getArgument());
         } catch (NullPointerException|NumberFormatException exception) {
-            System.out.println(exception.toString());
+            printer.print(exception.toString());
             y = 0;
         }
-        System.out.println("Введите название пункта отправки: ");
+        printer.print("Введите название пункта отправки: ");
         String name = null;
-        ArgumentParser.prepare();
         while(name == null) {
             try {
-                name = ArgumentParser.getArgument();
+                name = argumentProvider.getArgument();
             } catch (NullPointerException exception) {
                 name = null;
             }
             if(name == null) {
-                System.out.println("Название пункта отправки не может быть пустым. Попробуйте ввести название еще раз: ");
-                ArgumentParser.prepare();
+                printer.print("Название пункта отправки не может быть пустым. Попробуйте ввести название еще раз: ");
             }
         }
         return Location.LocationInitializer.createLocation(x, y, name);

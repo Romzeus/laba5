@@ -1,13 +1,16 @@
 package labs.commands;
 
+import labs.util.io.Printer;
+
 import java.util.Collection;
 import java.util.Iterator;
 
 public class Help implements Executable{
     private final Collection<Executable> commands;
-    public Help(Collection<Executable> commands) {
-//        super("help", "Выводит справку по доступным командам");
+    private Printer printer;
+    public Help(Collection<Executable> commands, Printer printer) {
         this.commands = commands;
+        this.printer = printer;
     }
     @Override
     public void execute() {
@@ -16,7 +19,7 @@ public class Help implements Executable{
         while(iterator.hasNext()) {
             temp = iterator.next();
             if (temp instanceof Command){
-                System.out.println(((Command)temp).describe());
+                printer.print(((Command)temp).describe());
             }
         }
     }

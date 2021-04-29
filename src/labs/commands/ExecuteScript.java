@@ -1,11 +1,15 @@
 package labs.commands;
 
 import labs.util.ArgumentParser;
-
+import labs.util.ArgumentProvider;
+import labs.util.FileArgumentParser;
+import labs.util.io.ConsolePrinter;
+import labs.util.io.FileScanner;
 import java.io.IOException;
 
 public class ExecuteScript extends Command{
     private final Invoker invoker;
+    private ArgumentProvider argumentProvider;
     public ExecuteScript(Invoker invoker) {
         super("execute_script", "Считывает и исполняет скрипт из файла");
         this.invoker = invoker;
@@ -13,14 +17,14 @@ public class ExecuteScript extends Command{
     @Override
     public void execute() {
         try {
-            String filepath = ArgumentParser.getArgument();
-            ArgumentParser.parseFile(filepath);
+            String filepath = argumentProvider.getArgument();
+            FileScanner fileScanner = new FileScanner(filepath);
+            argumentProvider = new FileArgumentParser(new ConsolePrinter(), fileScanner);
         } catch(IOException e) {
             System.out.println(e.toString());
-            ArgumentParser.clear();
         } finally {
-            while(ArgumentParser.hasNext()) {
-                invoker.activate(ArgumentParser.getArgument());
+            while(argumentProvider.hasNext()) {
+                invoker.activate(argumentProvider.getArgument());
             }
         }
     }

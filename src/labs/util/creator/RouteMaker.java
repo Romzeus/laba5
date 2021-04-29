@@ -1,39 +1,41 @@
 package labs.util.creator;
 import labs.structures.*;
-import labs.util.ArgumentParser;
+import labs.util.ArgumentProvider;
+import labs.util.io.Printer;
 
 public class RouteMaker extends Creator<Route> {
     private final CoordinatesMaker coordinatesMaker;
     private final LocationMaker locationMaker;
-    public RouteMaker() {
-        coordinatesMaker = new CoordinatesMaker();
-        locationMaker = new LocationMaker();
+    private ArgumentProvider argumentProvider;
+    private Printer printer;
+    public RouteMaker(ArgumentProvider argumentProvider, Printer printer) {
+        coordinatesMaker = new CoordinatesMaker(argumentProvider, printer);
+        locationMaker = new LocationMaker(argumentProvider, printer);
+        this.argumentProvider = argumentProvider;
+        this.printer = printer;
     }
     @Override
     public Route make() {
-        ArgumentParser.prepare();
         String name = null;
         while(name == null) {
             try {
-                name = ArgumentParser.getArgument();
+                name = argumentProvider.getArgument();
             } catch (NullPointerException exception) {
                 name = null;
             }
             if(name == null) {
-                System.out.println("Название не может быть пустым. Попробуйте ввести название еще раз: ");
-                ArgumentParser.prepare();
+                printer.print("Название не может быть пустым. Попробуйте ввести название еще раз: ");
             }
         }
         Float distance = null;
         while(distance == null || distance < 1f) {
             try {
-                distance = Float.parseFloat(ArgumentParser.getArgument());
+                distance = Float.parseFloat(argumentProvider.getArgument());
             } catch (NullPointerException|NumberFormatException exception) {
                 distance = null;
             }
             if(distance == null || distance < 1f) {
-                System.out.println("Расстояние не может быть меньше 1 или не числом. Попробуйте ввести расстояние еще раз: ");
-                ArgumentParser.prepare();
+                printer.print("Расстояние не может быть меньше 1 или не числом. Попробуйте ввести расстояние еще раз: ");
             }
         }
         Coordinates coordinates = coordinatesMaker.make();

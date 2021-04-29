@@ -2,19 +2,22 @@ package labs.commands;
 
 import labs.util.ArrayDequeLoader;
 import labs.util.ArrayDequeManager;
+import labs.util.io.Printer;
 
 public class Info extends Command{
-    public Info() {
+    private Printer printer;
+    public Info(Printer printer) {
         super("info", "Выводит информацию о коллекции");
+        this.printer = printer;
     }
     @Override
     public void execute() {
-        System.out.println("Тип коллекции: " + ArrayDequeManager.getArrayDeque().getClass().toString());
-        System.out.println("Тип элементов коллекции: ");
+        printer.print("Тип коллекции: " + ArrayDequeManager.getArrayDeque().getClass().toString());
+        printer.print("Тип элементов коллекции: ");
         if(ArrayDequeManager.getArrayDeque().isEmpty())
-            System.out.println("Нет элементов");
+            printer.print("Нет элементов");
         else
-            System.out.println(ArrayDequeManager.getArrayDeque().getFirst().getClass().toString());
-        System.out.println("Время инициализации: " + ArrayDequeLoader.getInitTime());
+            printer.print(ArrayDequeManager.getArrayDeque().getFirst().getClass().toString());
+        printer.print("Время инициализации: " + ArrayDequeLoader.getInitTime());
     }
 }
