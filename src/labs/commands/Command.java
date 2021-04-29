@@ -19,6 +19,9 @@ public abstract class Command implements Executable{
     }
     public abstract void execute();
     public final String describe() {
-        return name + ": " + description;
+        return description;
+    }
+    public final String toString(){
+        return name;
     }
 }

@@ -9,8 +9,8 @@ import labs.util.io.Printer;
  * @author Romzeus
  */
 public class RemoveId extends Command{
-    private ArgumentProvider argumentProvider;
-    private Printer printer;
+    private final ArgumentProvider argumentProvider;
+    private final Printer printer;
 
     /**
      * Constructor of RemoveId object
@@ -18,7 +18,7 @@ public class RemoveId extends Command{
      * @param printer Object of Printer interface
      */
     public RemoveId(ArgumentProvider argumentProvider, Printer printer) {
-        super("remove_by_id", "удаляет элемент из коллекции по id");
+        super("remove_by_id", "remove_by_id description");
         this.argumentProvider = argumentProvider;
         this.printer = printer;
     }
@@ -28,13 +28,13 @@ public class RemoveId extends Command{
         try {
         id = Integer.parseInt(argumentProvider.getArgument());
         } catch(NullPointerException|NumberFormatException exception) {
-            printer.print("Неправильный формат ввода id");
+            printer.print("Wrong id format");
             return;
         }
         try {
         ArrayDequeManager.delete(id);
         } catch(IllegalArgumentException exception) {
-            printer.print("Нет элемента с таким id");
+            printer.print("No id");
         }
     }
 }

@@ -3,11 +3,12 @@ import labs.commands.*;
 import labs.util.ArgumentParser;
 import labs.util.ArrayDequeLoader;
 import labs.util.io.*;
+import labs.util.locale.RussianLocalization;
 
 public class Main {
     public static void main(String[] args) {
         ConsoleScanner consoleScanner = new ConsoleScanner();
-        ConsolePrinter consolePrinter = new ConsolePrinter();
+        TranslatorPrinter consolePrinter = new TranslatorPrinter(new ConsolePrinter(), new RussianLocalization());
         Invoker invoker = new Invoker();
         ArgumentParser argumentParser = new ArgumentParser(consoleScanner);
         invoker.addCommand("exit", new Exit());

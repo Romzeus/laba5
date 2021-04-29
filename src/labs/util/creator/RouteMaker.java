@@ -31,6 +31,7 @@ public class RouteMaker implements Creator<Route> {
      */
     @Override
     public Route make() {
+        printer.print("Write name");
         String name = null;
         while(name == null) {
             try {
@@ -39,18 +40,28 @@ public class RouteMaker implements Creator<Route> {
                 name = null;
             }
             if(name == null) {
-                printer.print("Название не может быть пустым. Попробуйте ввести название еще раз: ");
+                printer.print("Name not null");
+                printer.print("Try again");
             }
         }
-        Float distance = null;
-        while(distance == null || distance < 1f) {
+        printer.print("Write distance");
+        Float distance = 0f;
+        while(distance < 1f) {
             try {
                 distance = Float.parseFloat(argumentProvider.getArgument());
             } catch (NullPointerException|NumberFormatException exception) {
-                distance = null;
-            }
-            if(distance == null || distance < 1f) {
-                printer.print("Расстояние не может быть меньше 1 или не числом. Попробуйте ввести расстояние еще раз: ");
+                if(exception instanceof NullPointerException) {
+                    distance = null;
+                    break;
+                }
+                if(exception instanceof NumberFormatException) {
+                    printer.print("Wrong format");
+                    printer.print("Try again");
+                    distance = 0f;
+                } else if(distance < 1f){
+                    printer.print("Distance not less than 1");
+                    printer.print("Try again");
+                }
             }
         }
         Coordinates coordinates = coordinatesMaker.make();

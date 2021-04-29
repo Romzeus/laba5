@@ -23,7 +23,7 @@ public class ExecuteScript extends Command{
      * @param printer Instance of Printer interface for output of possible exceptions
      */
     public ExecuteScript(Executor executor, ArgumentProvider argumentProvider, Printer printer) {
-        super("execute_script", "Считывает и исполняет скрипт из файла");
+        super("execute_script", "execute_script description");
         this.invoker = executor;
         this.argumentProvider = argumentProvider;
         this.printer = printer;
@@ -35,14 +35,14 @@ public class ExecuteScript extends Command{
             FileScanner fileScanner = new FileScanner(filepath);
             fileArgument = new ArgumentParser(fileScanner);
         } catch(FileNotFoundException exception) {
-            printer.print("Файл не найден");
+            printer.print("File not found");
         }
         try{
             argumentProvider.addArguments(fileArgument.getAll());
             while(argumentProvider.hasNext())
                 invoker.activate(argumentProvider.getArgument());
         } catch (NullPointerException exception) {
-            printer.print("Файл пуст");
+            printer.print("Empty file");
         }
     }
 }

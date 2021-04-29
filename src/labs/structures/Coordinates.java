@@ -4,8 +4,8 @@ package labs.structures;
  * Class of coordinates, required for Route class
  */
 public class Coordinates implements Comparable<Coordinates>{
-    private long x;
-    private Long y;
+    private final long x;
+    private final Long y;
 
     /**
      * Constructor of Coordinates object

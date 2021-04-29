@@ -8,8 +8,8 @@ import labs.util.io.Printer;
  * @author Romzeus
  */
 public class CoordinatesMaker implements Creator<Coordinates>{
-    private ArgumentProvider argumentProvider;
-    private Printer printer;
+    private final ArgumentProvider argumentProvider;
+    private final Printer printer;
 
     /**
      * Constructor for CoordinatesMaker object
@@ -26,7 +26,7 @@ public class CoordinatesMaker implements Creator<Coordinates>{
      * @return Coordinates object
      */
     public Coordinates make() {
-        printer.print("Введите координату x: ");
+        printer.print("Write x coordinate");
         long x = 140;
         while(x > 130) {
             try {
@@ -35,10 +35,11 @@ public class CoordinatesMaker implements Creator<Coordinates>{
                 printer.print(exception.toString());
             }
             if(x > 130) {
-                printer.print("Координата x не может быть больше 130. Попробуйте ввести координату еще раз: ");
+                printer.print("X coordinate not greater than 130");
+                printer.print("Try again");
             }
         }
-        printer.print("Введите координату y: ");
+        printer.print("Write y coordinate");
         Long y = null;
         while(y == null) {
             try {
@@ -47,7 +48,8 @@ public class CoordinatesMaker implements Creator<Coordinates>{
                 printer.print(exception.toString());
             }
             if(y == null) {
-                printer.print("Координата y не может быть пустой или не числом. Попробуйте ввести координату y еще раз: ");
+                printer.print("Y coordinate not null");
+                printer.print("Try again");
             }
         }
         return new Coordinates(x, y);

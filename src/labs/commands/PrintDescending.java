@@ -16,7 +16,7 @@ public class PrintDescending extends Command{
      * @param printer Object of Printer interface
      */
     public PrintDescending(Printer printer) {
-        super("print_descending", "Выводит элементы коллекции в порядке убывания");
+        super("print_descending", "print_descending description");
         this.printer = printer;
     }
     @Override

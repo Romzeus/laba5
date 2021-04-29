@@ -8,7 +8,7 @@ import java.util.Iterator;
  * @author Romzeus
  */
 public class ArrayDequeManager {
-    private static ArrayDeque<Route> arrayDeque = new ArrayDeque<>();
+    private final static ArrayDeque<Route> arrayDeque = new ArrayDeque<>();
 
     /**
      * Method for adding new Route instances

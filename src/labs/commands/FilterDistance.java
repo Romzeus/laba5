@@ -20,7 +20,7 @@ public class FilterDistance extends Command{
      * @param printer Object of Printer interface
      */
     public FilterDistance(ArgumentProvider argumentProvider, Printer printer) {
-        super("filter_less_than_distance", "Выводит элементы, значение поля distance которых меньше заданного");
+        super("filter_less_than_distance", "filter_less_than_distance description");
         this.argumentProvider = argumentProvider;
         this.printer = printer;
     }

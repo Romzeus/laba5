@@ -7,7 +7,7 @@ import labs.util.ArrayDequeManager;
  */
 public class Clear extends Command{
     public Clear() {
-        super("clear", "Удаляет все элементы коллекции");
+        super("clear", "clear description");
     }
     @Override
     public void execute() {

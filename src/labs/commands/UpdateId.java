@@ -24,7 +24,7 @@ public class UpdateId extends Command{
      * @param printer Object of Printer interface
      */
     public UpdateId(ArgumentProvider argumentProvider, Printer printer) {
-        super("update", "Обновляет значение элемента с заданным id");
+        super("update", "Update description");
         this.argumentProvider = argumentProvider;
         this.printer = printer;
     }
@@ -36,21 +36,25 @@ public class UpdateId extends Command{
         while(route.hasNext()) {
             current = route.next();
             if(current.getId() == id){
-                printer.print("Введите имя:");
+                printer.print("Write name");
                 String name = argumentProvider.getArgument();
-                printer.print("Создание объекта координат");
+                printer.print("Coordinate creation");
                 Coordinates coordinates = new CoordinatesMaker(argumentProvider, printer).make();
+                printer.print("Location creation");
                 Location location = new LocationMaker(argumentProvider, printer).make();
-                float distance;
-                try{
-                    distance = Float.parseFloat(argumentProvider.getArgument());
-                } catch(NullPointerException exception) {
-                    printer.print("Дистанция не может быть такой. Устанавливается минимальное значение 1");
-                    distance = 1f;
+                printer.print("Write distance");
+                Float distance = null;
+                while(distance == null) {
+                    try{
+                        distance = Float.parseFloat(argumentProvider.getArgument());
+                    } catch(NullPointerException exception) {
+                        printer.print("Distance not less than 1");
+                        printer.print("Try again");
+                    }
                 }
                 current.remake(name, coordinates, location, distance);
             }
         }
-        printer.print("Объект не найден");
+        printer.print("Object not found");
     }
 }

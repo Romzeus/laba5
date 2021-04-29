@@ -18,7 +18,7 @@ public class StartsWith extends Command{
      * @param printer Object of Printer interface
      */
     public StartsWith(ArgumentProvider argumentProvider, Printer printer) {
-        super("filter_starts_with_name", "Выводит элементы, значение поля name которых начинается с заданной подстроки");
+        super("filter_starts_with_name", "filter_starts_with_name description");
         this.printer = printer;
         this.argumentProvider = argumentProvider;
     }

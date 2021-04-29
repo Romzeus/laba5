@@ -3,9 +3,9 @@ package labs.structures;
  * Class of location, required for Route class
  */
 public class Location implements Comparable<Location>{
-    private Double x;
-    private int y;
-    private String name;
+    private final Double x;
+    private final int y;
+    private final String name;
 
     /**
      * Constructor of Location object

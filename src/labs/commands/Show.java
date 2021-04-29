@@ -16,7 +16,7 @@ public class Show extends Command{
      * @param printer Object of Printer interface
      */
     public Show(Printer printer) {
-        super("show", "Выводит элементы коллекции в строковом представлении");
+        super("show", "show description");
         this.printer = printer;
     }
     @Override

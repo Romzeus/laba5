@@ -34,9 +34,9 @@ public class ArrayDequeLoader {
             }
         } catch(IOException|NullPointerException exception) {
             if(exception instanceof NullPointerException)
-                printer.print("Файл пуст");
+                printer.print("Empty file");
             else
-                printer.print("Что-то пошло не так при открытии файла");
+                printer.print("Something wrong file");
         } finally {
             initTime = LocalDate.now();
         }

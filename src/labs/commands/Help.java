@@ -10,7 +10,7 @@ import java.util.Iterator;
  */
 public class Help implements Executable{
     private final Collection<Executable> commands;
-    private Printer printer;
+    private final Printer printer;
 
     /**
      * Constructor of Help object
@@ -28,6 +28,7 @@ public class Help implements Executable{
         while(iterator.hasNext()) {
             temp = iterator.next();
             if (temp instanceof Command){
+                printer.print(temp.toString() + ": ");
                 printer.print(((Command)temp).describe());
             }
         }

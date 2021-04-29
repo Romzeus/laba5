@@ -9,24 +9,26 @@ import labs.util.io.Printer;
  * @author Romzeus
  */
 public class Info extends Command{
-    private Printer printer;
+    private final Printer printer;
 
     /**
      * Constructor of Info class
      * @param printer Object of Printer interface
      */
     public Info(Printer printer) {
-        super("info", "Выводит информацию о коллекции");
+        super("info", "info description");
         this.printer = printer;
     }
     @Override
     public void execute() {
-        printer.print("Тип коллекции: " + ArrayDequeManager.getArrayDeque().getClass().toString());
-        printer.print("Тип элементов коллекции: ");
+        printer.print("Collection type");
+        printer.print(ArrayDequeManager.getArrayDeque().getClass().toString());
+        printer.print("Collection element type");
         if(ArrayDequeManager.getArrayDeque().isEmpty())
-            printer.print("Нет элементов");
+            printer.print("No elements");
         else
             printer.print(ArrayDequeManager.getArrayDeque().getFirst().getClass().toString());
-        printer.print("Время инициализации: " + ArrayDequeLoader.getInitTime());
+        printer.print("Init time");
+        printer.print(ArrayDequeLoader.getInitTime().toString());
     }
 }
