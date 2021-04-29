@@ -1,16 +1,22 @@
 package labs.commands;
 
 import labs.structures.Route;
-import labs.util.ArgumentParser;
 import labs.util.ArgumentProvider;
 import labs.util.ArrayDequeManager;
 import labs.util.io.Printer;
-
 import java.util.Iterator;
 
+/**
+ * Class of filter_starts_with_name command
+ */
 public class StartsWith extends Command{
     private Printer printer;
     private ArgumentProvider argumentProvider;
+    /**
+     * Constructor of StartsWith object
+     * @param argumentProvider Object of ArgumentProvider interface, which will provide arguments
+     * @param printer Object of Printer interface
+     */
     public StartsWith(ArgumentProvider argumentProvider, Printer printer) {
         super("filter_starts_with_name", "Выводит элементы, значение поля name которых начинается с заданной подстроки");
         this.printer = printer;

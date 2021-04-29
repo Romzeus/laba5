@@ -3,13 +3,28 @@ import labs.structures.Coordinates;
 import labs.util.ArgumentProvider;
 import labs.util.io.Printer;
 
-public class CoordinatesMaker extends Creator<Coordinates>{
+/**
+ * Class for creating new Coordinates objects from user input
+ * @author Romzeus
+ */
+public class CoordinatesMaker implements Creator<Coordinates>{
     private ArgumentProvider argumentProvider;
     private Printer printer;
+
+    /**
+     * Constructor for CoordinatesMaker object
+     * @param argumentProvider Object of ArgumentProvider interface, which will provide arguments for creating Coordinates
+     * @param printer Object of Printer interface
+     */
     public CoordinatesMaker(ArgumentProvider argumentProvider, Printer printer) {
         this.argumentProvider = argumentProvider;
         this.printer = printer;
     }
+
+    /**
+     * Method that creates new Coordinates objects
+     * @return Coordinates object
+     */
     public Coordinates make() {
         printer.print("Введите координату x: ");
         long x = 140;

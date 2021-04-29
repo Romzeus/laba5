@@ -8,12 +8,21 @@ import labs.util.ArrayDequeManager;
 import labs.util.creator.CoordinatesMaker;
 import labs.util.creator.LocationMaker;
 import labs.util.io.Printer;
-
 import java.util.Iterator;
 
+/**
+ * Class of update command
+ * @author Romzeus
+ */
 public class UpdateId extends Command{
     private final ArgumentProvider argumentProvider;
     private final Printer printer;
+
+    /**
+     * Constructor of UpdateId object
+     * @param argumentProvider Object of ArgumentProvider interface, which will provide arguments
+     * @param printer Object of Printer interface
+     */
     public UpdateId(ArgumentProvider argumentProvider, Printer printer) {
         super("update", "Обновляет значение элемента с заданным id");
         this.argumentProvider = argumentProvider;

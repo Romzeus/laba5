@@ -1,11 +1,21 @@
 package labs.commands;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import labs.util.ArrayDequeManager;
 import labs.util.io.FilePrinter;
 
+/**
+ * Class of save command
+ * @author Romzeus
+ */
 public class Save extends Command{
     private final FilePrinter filePrinter;
+
+    /**
+     * Constructor of Save object
+     * @param filePrinter Object of FilePrinter class, which will write serialized objects to json file
+     */
     public Save(FilePrinter filePrinter) {
         super("save", "Сохраняет коллекцию в json-файл");
         this.filePrinter = filePrinter;

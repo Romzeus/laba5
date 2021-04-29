@@ -4,8 +4,17 @@ import labs.util.ArrayDequeManager;
 import labs.util.creator.RouteMaker;
 import labs.util.io.ConsolePrinter;
 
+/**
+ * Class for add command
+ * @author Romzeus
+ */
 public class Add extends Command{
     private ArgumentProvider argumentProvider;
+
+    /**
+     * Constructor of Add class
+     * @param argumentProvider Object of ArgumentProvider interface, which will provide arguments for creating Route object
+     */
     public Add(ArgumentProvider argumentProvider) {
         super("add", "Добавляет в коллекцию новый объект");
         this.argumentProvider = argumentProvider;

@@ -3,8 +3,17 @@ package labs.commands;
 import labs.util.ArrayDequeManager;
 import labs.util.io.Printer;
 
+/**
+ * Class of head command
+ * @author Romzeus
+ */
 public class Head extends Command{
     private Printer printer;
+
+    /**
+     * Constructor of Head object
+     * @param printer Object of Printer interface
+     */
     public Head(Printer printer) {
         super("head", "Выводит первый элемент коллекции");
         this.printer = printer;

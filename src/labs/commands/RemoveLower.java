@@ -5,11 +5,19 @@ import labs.util.ArgumentProvider;
 import labs.util.ArrayDequeManager;
 import labs.util.creator.RouteMaker;
 import labs.util.io.ConsolePrinter;
-
 import java.util.Iterator;
 
+/**
+ * Class of remove_lower command
+ * @author Romzeus
+ */
 public class RemoveLower extends Command{
-    private ArgumentProvider argumentProvider;
+    private final ArgumentProvider argumentProvider;
+
+    /**
+     * Constructor of RemoveLower object
+     * @param argumentProvider Object of ArgumentProvider interface, which will provide arguments
+     */
     public RemoveLower(ArgumentProvider argumentProvider) {
         super("remove_lower", "Удаляет из коллекции элементы, меньшие заданного");
         this.argumentProvider = argumentProvider;

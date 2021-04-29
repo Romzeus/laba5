@@ -1,5 +1,9 @@
 package labs.util.creator;
 
-public abstract class Creator<T> {
-    public abstract T make();
+/**
+ * Interface for classes that create new instances of T class
+ * @param <T> Class of created object
+ */
+public interface Creator<T> {
+    T make();
 }

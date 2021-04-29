@@ -2,16 +2,14 @@ package labs;
 import labs.commands.*;
 import labs.util.ArgumentParser;
 import labs.util.ArrayDequeLoader;
-import labs.util.io.ConsolePrinter;
-import labs.util.io.ConsoleScanner;
-import labs.util.io.FilePrinter;
+import labs.util.io.*;
 
 public class Main {
     public static void main(String[] args) {
         ConsoleScanner consoleScanner = new ConsoleScanner();
         ConsolePrinter consolePrinter = new ConsolePrinter();
         Invoker invoker = new Invoker();
-        ArgumentParser argumentParser = new ArgumentParser();
+        ArgumentParser argumentParser = new ArgumentParser(consoleScanner);
         invoker.addCommand("exit", new Exit());
         invoker.addCommand("add", new Add(argumentParser));
         invoker.addCommand("clear", new Clear());
@@ -20,14 +18,12 @@ public class Main {
         invoker.addCommand("remove_by_id", new RemoveId(argumentParser, consolePrinter));
         invoker.addCommand("head", new Head(consolePrinter));
         invoker.addCommand("history", new History(consolePrinter));
-        invoker.addCommand("execute_script", new ExecuteScript(invoker));
+        invoker.addCommand("execute_script", new ExecuteScript(invoker, argumentParser, consolePrinter));
         invoker.addCommand("info", new Info(consolePrinter));
         invoker.addCommand("remove_lower", new RemoveLower(argumentParser));
         invoker.addCommand("filter_starts_with_name", new StartsWith(argumentParser, consolePrinter));
         invoker.addCommand("filter_less_than_distance", new FilterDistance(argumentParser, consolePrinter));
         invoker.addCommand("update", new UpdateId(argumentParser, consolePrinter));
-        argumentParser.setScanner(consoleScanner);
-        argumentParser.setPrinter(consolePrinter);
         FilePrinter filePrinter = new FilePrinter(consolePrinter, System.getenv("SERIALIZED_COLLECTION").replace("\\", "\\\\"));
         invoker.addCommand("save", new Save(filePrinter));
         invoker.addCommand("help", new Help(invoker.getCommands().values(), consolePrinter));

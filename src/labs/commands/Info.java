@@ -4,8 +4,17 @@ import labs.util.ArrayDequeLoader;
 import labs.util.ArrayDequeManager;
 import labs.util.io.Printer;
 
+/**
+ * Class of info command
+ * @author Romzeus
+ */
 public class Info extends Command{
     private Printer printer;
+
+    /**
+     * Constructor of Info class
+     * @param printer Object of Printer interface
+     */
     public Info(Printer printer) {
         super("info", "Выводит информацию о коллекции");
         this.printer = printer;

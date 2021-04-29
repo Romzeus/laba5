@@ -3,17 +3,32 @@ import labs.structures.*;
 import labs.util.ArgumentProvider;
 import labs.util.io.Printer;
 
-public class RouteMaker extends Creator<Route> {
+/**
+ * Class for creating new Route objects from user input
+ * @author Romzeus
+ */
+public class RouteMaker implements Creator<Route> {
     private final CoordinatesMaker coordinatesMaker;
     private final LocationMaker locationMaker;
     private final ArgumentProvider argumentProvider;
     private final Printer printer;
+
+    /**
+     * Constructor of RouteMaker object
+     * @param argumentProvider Instance of ArgumentProvider interface that will provide arguments for creation of Route objects
+     * @param printer Instance of Printer object
+     */
     public RouteMaker(ArgumentProvider argumentProvider, Printer printer) {
         coordinatesMaker = new CoordinatesMaker(argumentProvider, printer);
         locationMaker = new LocationMaker(argumentProvider, printer);
         this.argumentProvider = argumentProvider;
         this.printer = printer;
     }
+
+    /**
+     * Method that creates Route objects
+     * @return Route object
+     */
     @Override
     public Route make() {
         String name = null;

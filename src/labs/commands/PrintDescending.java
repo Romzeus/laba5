@@ -2,11 +2,19 @@ package labs.commands;
 import labs.structures.Route;
 import labs.util.ArrayDequeManager;
 import labs.util.io.Printer;
-
 import java.util.Arrays;
 
+/**
+ * Class for print_descending command
+ * @author Romzeus
+ */
 public class PrintDescending extends Command{
     private Printer printer;
+
+    /**
+     * Constructor of PrintDescending object
+     * @param printer Object of Printer interface
+     */
     public PrintDescending(Printer printer) {
         super("print_descending", "Выводит элементы коллекции в порядке убывания");
         this.printer = printer;

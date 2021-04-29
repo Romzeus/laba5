@@ -9,6 +9,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayDeque;
 import java.time.LocalDate;
 
+/**
+ * Class responsible for loading collection of Route instances from json file
+ * @author Romzeus
+ */
 public class ArrayDequeLoader {
     public static final String filepath = System.getenv("SERIALIZED_COLLECTION").replace("\\", "\\\\");
     private static LocalDate initTime;
@@ -18,6 +22,10 @@ public class ArrayDequeLoader {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         return gson.fromJson(in, type);
     }
+
+    /**
+     * Method that loads collection from file
+     */
     public static void load() {
         try(InputStreamReader in = new InputStreamReader(new FileInputStream(filepath))) {
             ArrayDeque<Route> arrayDeque = deserialize(in);
@@ -33,9 +41,19 @@ public class ArrayDequeLoader {
             initTime = LocalDate.now();
         }
     }
+
+    /**
+     * Method that allows to set Printer for output of exceptions
+     * @param printer Printer instance for output of exceptions
+     */
     public static void setPrinter(Printer printer) {
         ArrayDequeLoader.printer = printer;
     }
+
+    /**
+     * Method providing initialization time of collection
+     * @return Initialization time
+     */
     public static LocalDate getInitTime() {
         return initTime;
     }

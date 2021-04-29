@@ -3,13 +3,27 @@ import labs.structures.Location;
 import labs.util.ArgumentProvider;
 import labs.util.io.Printer;
 
-public class LocationMaker extends Creator<Location> {
+/**
+ * Class for creating new Location objects from user input
+ */
+public class LocationMaker implements Creator<Location> {
     private final ArgumentProvider argumentProvider;
     private final Printer printer;
+
+    /**
+     * Constructor for LocationMaker object
+     * @param argumentProvider Object of ArgumentProvider which will provide arguments for creating Location object
+     * @param printer Object of Printer interface
+     */
     public LocationMaker(ArgumentProvider argumentProvider, Printer printer) {
         this.argumentProvider = argumentProvider;
         this.printer = printer;
     }
+
+    /**
+     * Method that creates new Location objects
+     * @return Location object
+     */
     public Location make() {
         printer.print("Введите координату x пункта отправки");
         Double x = null;

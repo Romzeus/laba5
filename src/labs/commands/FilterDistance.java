@@ -1,16 +1,24 @@
 package labs.commands;
 
 import labs.structures.Route;
-import labs.util.ArgumentParser;
 import labs.util.ArgumentProvider;
 import labs.util.ArrayDequeManager;
 import labs.util.io.Printer;
-
 import java.util.Iterator;
 
+/**
+ * Class for filter_less_than_distance command
+ * @author Romzeus
+ */
 public class FilterDistance extends Command{
     private ArgumentProvider argumentProvider;
     private Printer printer;
+
+    /**
+     *Constructor of FilterDistance object
+     * @param argumentProvider Object of ArgumentProvider interface
+     * @param printer Object of Printer interface
+     */
     public FilterDistance(ArgumentProvider argumentProvider, Printer printer) {
         super("filter_less_than_distance", "Выводит элементы, значение поля distance которых меньше заданного");
         this.argumentProvider = argumentProvider;

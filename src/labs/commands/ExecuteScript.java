@@ -1,30 +1,48 @@
 package labs.commands;
 
+import labs.util.ArgumentParser;
 import labs.util.ArgumentProvider;
-import labs.util.FileArgumentParser;
-import labs.util.io.ConsolePrinter;
 import labs.util.io.FileScanner;
-import java.io.IOException;
+import labs.util.io.Printer;
+import java.io.FileNotFoundException;
 
+/**
+ * Class for execute_script command
+ * @author Romzeus
+ */
 public class ExecuteScript extends Command{
     private final Executor invoker;
-    private ArgumentProvider argumentProvider;
-    public ExecuteScript(Executor executor) {
+    private final ArgumentProvider argumentProvider;
+    private ArgumentProvider fileArgument;
+    private final Printer printer;
+
+    /**
+     * Constructor for ExecuteScript object
+     * @param executor Instance of executor interface, that will call commands written in file
+     * @param argumentProvider Instance of ArgumentProvider interface, which will provide path to the script file
+     * @param printer Instance of Printer interface for output of possible exceptions
+     */
+    public ExecuteScript(Executor executor, ArgumentProvider argumentProvider, Printer printer) {
         super("execute_script", "Считывает и исполняет скрипт из файла");
         this.invoker = executor;
+        this.argumentProvider = argumentProvider;
+        this.printer = printer;
     }
     @Override
     public void execute() {
         try {
             String filepath = argumentProvider.getArgument();
             FileScanner fileScanner = new FileScanner(filepath);
-            argumentProvider = new FileArgumentParser(new ConsolePrinter(), fileScanner);
-        } catch(IOException e) {
-            System.out.println(e.toString());
-        } finally {
-            while(argumentProvider.hasNext()) {
+            fileArgument = new ArgumentParser(fileScanner);
+        } catch(FileNotFoundException exception) {
+            printer.print("Файл не найден");
+        }
+        try{
+            argumentProvider.addArguments(fileArgument.getAll());
+            while(argumentProvider.hasNext())
                 invoker.activate(argumentProvider.getArgument());
-            }
+        } catch (NullPointerException exception) {
+            printer.print("Файл пуст");
         }
     }
 }
