@@ -1,6 +1,13 @@
 package labs.util.locale;
 
+/**
+ * Russian localization class
+ * @author Romzeus
+ */
 public class RussianLocalization extends Localization{
+    /**
+     * Constructor of RussianLocalization with basic keyphrase collection
+     */
     public RussianLocalization() {
         addEntry("Incorrect command", "Неверная команда");
         addEntry("Empty file", "Файл пуст");
