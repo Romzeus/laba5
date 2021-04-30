@@ -34,7 +34,7 @@ public class Main {
             try {
                 invoker.activate(argumentParser.getArgument());
             } catch(IllegalArgumentException exception) {
-                consolePrinter.print("Некорректная команда");
+                consolePrinter.print("Incorrect command");
             }
         }
     }
