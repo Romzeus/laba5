@@ -48,5 +48,6 @@ public class RussianLocalization extends Localization{
         addEntry("File not found", "Файл не найден");
         addEntry("clear description", "Удаляет все элементы коллекции");
         addEntry("add description", "Добавляет в коллекцию новый объект");
+        addEntry("Recursion", "Обнаружена рекурсия");
     }
 }

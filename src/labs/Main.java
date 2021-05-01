@@ -1,5 +1,6 @@
 package labs;
 import labs.commands.*;
+import labs.exceptions.Recursion;
 import labs.util.ArgumentParser;
 import labs.util.ArrayDequeLoader;
 import labs.util.io.*;
@@ -33,8 +34,13 @@ public class Main {
         while(true) {
             try {
                 invoker.activate(argumentParser.getArgument());
-            } catch(IllegalArgumentException exception) {
-                consolePrinter.print("Incorrect command");
+            } catch(IllegalArgumentException|Recursion exception) {
+                if(exception instanceof IllegalArgumentException)
+                    consolePrinter.print("Incorrect command");
+                else {
+                    consolePrinter.print(exception.getMessage());
+                    argumentParser.clear();
+                }
             }
         }
     }
