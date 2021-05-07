@@ -8,7 +8,7 @@ import labs.util.io.Printer;
  * @author Romzeus
  */
 public class CoordinatesMaker implements Creator<Coordinates>{
-    private final ArgumentProvider argumentProvider;
+    private final ArgumentProvider<String> argumentProvider;
     private final Printer printer;
 
     /**
@@ -16,7 +16,7 @@ public class CoordinatesMaker implements Creator<Coordinates>{
      * @param argumentProvider Object of ArgumentProvider interface, which will provide arguments for creating Coordinates
      * @param printer Object of Printer interface
      */
-    public CoordinatesMaker(ArgumentProvider argumentProvider, Printer printer) {
+    public CoordinatesMaker(ArgumentProvider<String> argumentProvider, Printer printer) {
         this.argumentProvider = argumentProvider;
         this.printer = printer;
     }

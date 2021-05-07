@@ -10,14 +10,14 @@ import java.util.Iterator;
  * Class of filter_starts_with_name command
  */
 public class StartsWith extends Command{
-    private Printer printer;
-    private ArgumentProvider argumentProvider;
+    private final Printer printer;
+    private ArgumentProvider<String> argumentProvider;
     /**
      * Constructor of StartsWith object
      * @param argumentProvider Object of ArgumentProvider interface, which will provide arguments
      * @param printer Object of Printer interface
      */
-    public StartsWith(ArgumentProvider argumentProvider, Printer printer) {
+    public StartsWith(ArgumentProvider<String> argumentProvider, Printer printer) {
         super("filter_starts_with_name", "filter_starts_with_name description");
         this.printer = printer;
         this.argumentProvider = argumentProvider;

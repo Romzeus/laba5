@@ -9,7 +9,7 @@ import labs.util.io.Printer;
  * @author Romzeus
  */
 public class Show extends Command{
-    private Printer printer;
+    private final Printer printer;
 
     /**
      * Constructor of Show object

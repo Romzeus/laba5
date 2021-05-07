@@ -11,7 +11,7 @@ import labs.util.io.*;
  * Class for managing user input of commands and arguments
  * @author Romzeus
  */
-public class ArgumentParser implements ArgumentProvider{
+public class ArgumentParser implements ArgumentProvider<String>{
     private final Scanner scanner;
     private Deque<String> arguments = new ArrayDeque<>();
 

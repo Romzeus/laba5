@@ -12,13 +12,13 @@ import java.util.Iterator;
  * @author Romzeus
  */
 public class RemoveLower extends Command{
-    private final ArgumentProvider argumentProvider;
+    private final ArgumentProvider<String> argumentProvider;
 
     /**
      * Constructor of RemoveLower object
      * @param argumentProvider Object of ArgumentProvider interface, which will provide arguments
      */
-    public RemoveLower(ArgumentProvider argumentProvider) {
+    public RemoveLower(ArgumentProvider<String> argumentProvider) {
         super("remove_lower", "remove_lower description");
         this.argumentProvider = argumentProvider;
     }

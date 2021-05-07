@@ -10,7 +10,7 @@ import labs.util.io.Printer;
 public class RouteMaker implements Creator<Route> {
     private final CoordinatesMaker coordinatesMaker;
     private final LocationMaker locationMaker;
-    private final ArgumentProvider argumentProvider;
+    private final ArgumentProvider<String> argumentProvider;
     private final Printer printer;
 
     /**
@@ -18,7 +18,7 @@ public class RouteMaker implements Creator<Route> {
      * @param argumentProvider Instance of ArgumentProvider interface that will provide arguments for creation of Route objects
      * @param printer Instance of Printer object
      */
-    public RouteMaker(ArgumentProvider argumentProvider, Printer printer) {
+    public RouteMaker(ArgumentProvider<String> argumentProvider, Printer printer) {
         coordinatesMaker = new CoordinatesMaker(argumentProvider, printer);
         locationMaker = new LocationMaker(argumentProvider, printer);
         this.argumentProvider = argumentProvider;

@@ -7,7 +7,7 @@ import labs.util.io.Printer;
  * Class for creating new Location objects from user input
  */
 public class LocationMaker implements Creator<Location> {
-    private final ArgumentProvider argumentProvider;
+    private final ArgumentProvider<String> argumentProvider;
     private final Printer printer;
 
     /**
@@ -15,7 +15,7 @@ public class LocationMaker implements Creator<Location> {
      * @param argumentProvider Object of ArgumentProvider which will provide arguments for creating Location object
      * @param printer Object of Printer interface
      */
-    public LocationMaker(ArgumentProvider argumentProvider, Printer printer) {
+    public LocationMaker(ArgumentProvider<String> argumentProvider, Printer printer) {
         this.argumentProvider = argumentProvider;
         this.printer = printer;
     }

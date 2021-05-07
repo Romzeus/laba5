@@ -6,12 +6,12 @@ import java.util.Deque;
  * Interface for classes that provide arguments for different parts of program
  * @author Romzeus
  */
-public interface ArgumentProvider {
+public interface ArgumentProvider<T> {
     /**
      * Method that returns next argument
      * @return String argument
      */
-    String getArgument();
+    T getArgument();
 
     /**
      * Method that tells are there arguments left
@@ -23,11 +23,11 @@ public interface ArgumentProvider {
      * Method that allows to get arguments from another ArgumentProvider instance
      * @param arguments arguments from different ArgumentProvider instance
      */
-    void addArguments(Deque<String> arguments);
+    void addArguments(Deque<T> arguments);
 
     /**
      * Method that allows to show arguments
      * @return String Deque of arguments
      */
-    Deque<String> getAll();
+    Deque<T> getAll();
 }

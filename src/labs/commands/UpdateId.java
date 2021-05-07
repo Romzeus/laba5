@@ -15,7 +15,7 @@ import java.util.Iterator;
  * @author Romzeus
  */
 public class UpdateId extends Command{
-    private final ArgumentProvider argumentProvider;
+    private final ArgumentProvider<String> argumentProvider;
     private final Printer printer;
 
     /**
@@ -23,7 +23,7 @@ public class UpdateId extends Command{
      * @param argumentProvider Object of ArgumentProvider interface, which will provide arguments
      * @param printer Object of Printer interface
      */
-    public UpdateId(ArgumentProvider argumentProvider, Printer printer) {
+    public UpdateId(ArgumentProvider<String> argumentProvider, Printer printer) {
         super("update", "Update description");
         this.argumentProvider = argumentProvider;
         this.printer = printer;
