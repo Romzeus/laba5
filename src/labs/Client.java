@@ -5,7 +5,7 @@ import labs.util.ArrayDequeLoader;
 import labs.util.io.*;
 import labs.util.locale.RussianLocalization;
 
-public class Main {
+public class Client {
     public static void main(String[] args) {
         ConsoleScanner consoleScanner = new ConsoleScanner();
         TranslatorPrinter consolePrinter = new TranslatorPrinter(new ConsolePrinter(), new RussianLocalization());
@@ -26,7 +26,7 @@ public class Main {
         invoker.addCommand("filter_less_than_distance", new FilterDistance(argumentParser, consolePrinter));
         invoker.addCommand("update", new UpdateId(argumentParser, consolePrinter));
         FilePrinter filePrinter = new FilePrinter(consolePrinter, System.getenv("SERIALIZED_COLLECTION").replace("\\", "\\\\"));
-        invoker.addCommand("save", new Save(filePrinter));
+//        invoker.addCommand("save", new Save(filePrinter));
         invoker.addCommand("help", new Help(invoker.getCommands().values(), consolePrinter));
         ArrayDequeLoader.setPrinter(consolePrinter);
         ArrayDequeLoader.load();
