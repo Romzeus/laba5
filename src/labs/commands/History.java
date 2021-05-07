@@ -9,7 +9,7 @@ import java.util.Iterator;
  * @author Romzeus
  */
 public class History extends Command{
-    private Printer printer;
+    private final Printer printer;
 
     /**
      * Constructor of History object

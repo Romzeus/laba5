@@ -11,15 +11,15 @@ import java.util.Iterator;
  * @author Romzeus
  */
 public class FilterDistance extends Command{
-    private ArgumentProvider argumentProvider;
-    private Printer printer;
+    private final ArgumentProvider<String> argumentProvider;
+    private final Printer printer;
 
     /**
      *Constructor of FilterDistance object
      * @param argumentProvider Object of ArgumentProvider interface
      * @param printer Object of Printer interface
      */
-    public FilterDistance(ArgumentProvider argumentProvider, Printer printer) {
+    public FilterDistance(ArgumentProvider<String> argumentProvider, Printer printer) {
         super("filter_less_than_distance", "filter_less_than_distance description");
         this.argumentProvider = argumentProvider;
         this.printer = printer;

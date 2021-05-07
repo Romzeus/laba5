@@ -15,8 +15,8 @@ import java.util.Stack;
 public class ExecuteScript extends Command{
     private final Stack<String> executing = new Stack<>();
     private final Executor invoker;
-    private final ArgumentProvider argumentProvider;
-    private ArgumentProvider fileArgument;
+    private final ArgumentProvider<String> argumentProvider;
+    private ArgumentProvider<String> fileArgument;
     private final Printer printer;
 
     /**
@@ -25,7 +25,7 @@ public class ExecuteScript extends Command{
      * @param argumentProvider Instance of ArgumentProvider interface, which will provide path to the script file
      * @param printer Instance of Printer interface for output of possible exceptions
      */
-    public ExecuteScript(Executor executor, ArgumentProvider argumentProvider, Printer printer) {
+    public ExecuteScript(Executor executor, ArgumentProvider<String> argumentProvider, Printer printer) {
         super("execute_script", "execute_script description");
         this.invoker = executor;
         this.argumentProvider = argumentProvider;

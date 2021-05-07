@@ -9,13 +9,13 @@ import labs.util.io.ConsolePrinter;
  * @author Romzeus
  */
 public class Add extends Command{
-    private ArgumentProvider argumentProvider;
+    private final ArgumentProvider<String> argumentProvider;
 
     /**
      * Constructor of Add class
      * @param argumentProvider Object of ArgumentProvider interface, which will provide arguments for creating Route object
      */
-    public Add(ArgumentProvider argumentProvider) {
+    public Add(ArgumentProvider<String> argumentProvider) {
         super("add", "add description");
         this.argumentProvider = argumentProvider;
     }

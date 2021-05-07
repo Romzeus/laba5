@@ -9,7 +9,7 @@ import labs.util.io.Printer;
  * @author Romzeus
  */
 public class RemoveId extends Command{
-    private final ArgumentProvider argumentProvider;
+    private final ArgumentProvider<String> argumentProvider;
     private final Printer printer;
 
     /**
@@ -17,7 +17,7 @@ public class RemoveId extends Command{
      * @param argumentProvider Object of ArgumentProvider interface, which will provide arguments
      * @param printer Object of Printer interface
      */
-    public RemoveId(ArgumentProvider argumentProvider, Printer printer) {
+    public RemoveId(ArgumentProvider<String> argumentProvider, Printer printer) {
         super("remove_by_id", "remove_by_id description");
         this.argumentProvider = argumentProvider;
         this.printer = printer;
