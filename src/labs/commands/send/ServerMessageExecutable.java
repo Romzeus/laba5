@@ -4,5 +4,4 @@ import labs.commands.tokens.ServerToken;
 
 public interface ServerMessageExecutable {
     ServerToken getToken();
-    Object getArguments();
 }
