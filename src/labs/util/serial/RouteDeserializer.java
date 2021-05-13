@@ -4,7 +4,7 @@ import com.google.gson.reflect.TypeToken;
 import labs.structures.Route;
 import java.lang.reflect.Type;
 
-public class RouteDeserializer extends AbstractDeserializer<Route> {
+public class RouteDeserializer extends GsonDeserializer<Route> {
     private final Type type = new TypeToken<Route>(){}.getType();
     @Override
     public Route deserialize(String serializedObject) {

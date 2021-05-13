@@ -1,5 +1,5 @@
-package labs.commands.send;
+package labs.send;
 
 public interface ServerMessageObject extends ServerMessageExecutable {
-    Object getArguments();
+    Object getArgument();
 }

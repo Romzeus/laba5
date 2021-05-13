@@ -1,4 +1,4 @@
-package labs.commands.send;
+package labs.send;
 
 import labs.structures.Route;
 

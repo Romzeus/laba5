@@ -1,4 +1,4 @@
-package labs.commands.tokens;
+package labs.tokens;
 
 public class Add implements ServerToken{
     @Override

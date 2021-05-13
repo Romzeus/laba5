@@ -1,8 +1,8 @@
-package labs.commands.server;
+package labs.server;
 
 import labs.commands.Executable;
 import labs.commands.Executor;
-import labs.commands.tokens.ServerToken;
+import labs.tokens.ServerToken;
 import java.util.HashMap;
 
 public class ServerInvoker implements Executor {

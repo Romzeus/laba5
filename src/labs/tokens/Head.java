@@ -1,4 +1,4 @@
-package labs.commands.tokens;
+package labs.tokens;
 
 public class Head implements ServerToken{
     @Override

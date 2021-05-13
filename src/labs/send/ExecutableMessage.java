@@ -1,6 +1,6 @@
-package labs.commands.send;
+package labs.send;
 
-import labs.commands.tokens.ServerToken;
+import labs.tokens.ServerToken;
 
 public class ExecutableMessage implements ServerMessageExecutable{
     private ServerToken token;
