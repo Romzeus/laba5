@@ -1,14 +1,12 @@
 package labs.send;
 
-import labs.tokens.ServerToken;
-
 public class ExecutableMessage implements ServerMessageExecutable{
-    private ServerToken token;
-    public ExecutableMessage(ServerToken token) {
+    private String token;
+    public ExecutableMessage(String token) {
         this.token = token;
     }
     @Override
-    public ServerToken getToken() {
+    public String getToken() {
         return token;
     }
 }

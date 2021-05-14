@@ -1,16 +1,15 @@
 package labs.send;
 
-import labs.tokens.ServerToken;
 
 public class ServerMessage implements ServerMessageObject{
-    private final ServerToken serverToken;
+    private final String serverToken;
     private final Object object;
-    public ServerMessage(ServerToken token, Object object) {
+    public ServerMessage(String token, Object object) {
         this.serverToken = token;
         this.object = object;
     }
     @Override
-    public ServerToken getToken() {
+    public String getToken() {
         return serverToken;
     }
     @Override

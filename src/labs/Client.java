@@ -26,7 +26,6 @@ public class Client {
         invoker.addCommand("filter_less_than_distance", new FilterDistance(argumentParser, consolePrinter));
         invoker.addCommand("update", new UpdateId(argumentParser, consolePrinter));
         FilePrinter filePrinter = new FilePrinter(consolePrinter, System.getenv("SERIALIZED_COLLECTION").replace("\\", "\\\\"));
-//        invoker.addCommand("save", new Save(filePrinter));
         invoker.addCommand("help", new Help(invoker.getCommands().values(), consolePrinter));
         ArrayDequeLoader.setPrinter(consolePrinter);
         ArrayDequeLoader.load();
