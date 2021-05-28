@@ -1,6 +1,7 @@
 package labs.server;
 
 import labs.server.commands.*;
+import labs.util.ArrayDequeLoader;
 import labs.util.io.Receiver;
 import labs.util.io.Sender;
 import labs.util.io.ServerPrinter;
@@ -43,6 +44,8 @@ public class ServerApp {
             socket = null;
         }
         initCommands();
+        ArrayDequeLoader.setPrinter(Sender::print);
+        ArrayDequeLoader.load();
         if(socket != null) {
             while(true) {
                 try {
