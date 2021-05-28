@@ -1,12 +1,33 @@
 package labs.send;
 
 
-public class ServerMessage implements ServerMessageObject{
-    private final String serverToken;
-    private final Object object;
-    public ServerMessage(String token, Object object) {
-        this.serverToken = token;
-        this.object = object;
+import labs.structures.Route;
+
+public class ServerMessage implements ServerMessageRoute{
+    private String serverToken = null;
+    private Route route = null;
+    private Integer id = null;
+    private Float distance = null;
+    private String name = null;
+    public ServerMessage setServerToken(String serverToken) {
+        this.serverToken = serverToken;
+        return this;
+    }
+    public ServerMessage setRoute(Route route) {
+        this.route = route;
+        return this;
+    }
+    public ServerMessage setId(int id) {
+        this.id = id;
+        return this;
+    }
+    public ServerMessage setDistance(float distance) {
+        this.distance = distance;
+        return this;
+    }
+    public ServerMessage setName(String name) {
+        this.name = name;
+        return this;
     }
     @Override
     public String getToken() {
@@ -14,6 +35,22 @@ public class ServerMessage implements ServerMessageObject{
     }
     @Override
     public Object getArgument() {
-        return object;
+        return route;
+    }
+    @Override
+    public float getDistance() {
+        return distance;
+    }
+    @Override
+    public int getId() {
+        return id;
+    }
+    @Override
+    public Route getRoute() {
+        return route;
+    }
+    @Override
+    public String getName() {
+        return name;
     }
 }

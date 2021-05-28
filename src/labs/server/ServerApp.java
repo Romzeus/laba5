@@ -1,5 +1,8 @@
 package labs.server;
 
+import labs.server.commands.*;
+import labs.util.io.Receiver;
+import labs.util.io.Sender;
 import labs.util.io.ServerPrinter;
 import labs.util.io.ServerScanner;
 import java.io.IOException;
@@ -18,6 +21,20 @@ public class ServerApp {
         Sender.setPrinter(new ServerPrinter(socket));
         Receiver.setScanner(new ServerScanner(socket));
     }
+    private void initCommands() {
+        invoker.addCommand("add", new Add(provider));
+        invoker.addCommand("clear", new Clear());
+        invoker.addCommand("filter_less_than_distance", new FilterDistance(provider));
+        invoker.addCommand("get_id", new GetId());
+        invoker.addCommand("head", new Head());
+        invoker.addCommand("info", new Info());
+        invoker.addCommand("print_descending", new PrintDescending());
+        invoker.addCommand("remove", new RemoveId(provider));
+        invoker.addCommand("remove_lower", new RemoveLower(provider));
+        invoker.addCommand("show", new Show());
+        invoker.addCommand("filter_starts_with_name", new StartsWith(provider));
+        invoker.addCommand("update", new UpdateId(provider));
+    }
     public void run() {
         try {
             initSocket();
@@ -25,6 +42,7 @@ public class ServerApp {
         } catch(IOException exception) {
             socket = null;
         }
+        initCommands();
         if(socket != null) {
             while(true) {
                 try {

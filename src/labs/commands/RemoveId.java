@@ -9,8 +9,8 @@ import labs.util.io.Printer;
  * @author Romzeus
  */
 public class RemoveId extends Command{
-    private final ArgumentProvider<String> argumentProvider;
-    private final Printer printer;
+    protected final ArgumentProvider<String> argumentProvider;
+    protected final Printer printer;
 
     /**
      * Constructor of RemoveId object

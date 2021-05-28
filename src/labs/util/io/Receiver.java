@@ -1,7 +1,6 @@
-package labs.server;
+package labs.util.io;
 
 import labs.send.ServerMessage;
-import labs.util.io.Scanner;
 import labs.util.serial.GsonDeserializer;
 
 public class Receiver {

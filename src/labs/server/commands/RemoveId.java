@@ -1,7 +1,7 @@
 package labs.server.commands;
 
 import labs.commands.Executable;
-import labs.server.Sender;
+import labs.util.io.Sender;
 import labs.util.ArgumentParser;
 import labs.util.ArgumentProvider;
 import labs.util.io.Scanner;

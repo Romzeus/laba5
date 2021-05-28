@@ -10,8 +10,8 @@ import java.util.Iterator;
  * Class of filter_starts_with_name command
  */
 public class StartsWith extends Command{
-    private final Printer printer;
-    private ArgumentProvider<String> argumentProvider;
+    protected final Printer printer;
+    protected ArgumentProvider<String> argumentProvider;
     /**
      * Constructor of StartsWith object
      * @param argumentProvider Object of ArgumentProvider interface, which will provide arguments

@@ -1,7 +1,7 @@
 package labs.server.commands;
 
 import labs.commands.Executable;
-import labs.server.Sender;
+import labs.util.io.Sender;
 import labs.structures.Route;
 import labs.util.ArrayDequeManager;
 import java.util.Comparator;

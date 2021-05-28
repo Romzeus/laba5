@@ -1,6 +1,4 @@
-package labs.server;
-
-import labs.util.io.Printer;
+package labs.util.io;
 
 public class Sender {
     private static Printer printer;

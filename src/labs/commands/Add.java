@@ -9,7 +9,7 @@ import labs.util.io.ConsolePrinter;
  * @author Romzeus
  */
 public class Add extends Command{
-    private final ArgumentProvider<String> argumentProvider;
+    protected final ArgumentProvider<String> argumentProvider;
 
     /**
      * Constructor of Add class

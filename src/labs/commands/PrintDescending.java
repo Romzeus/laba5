@@ -9,7 +9,7 @@ import java.util.Arrays;
  * @author Romzeus
  */
 public class PrintDescending extends Command{
-    private final Printer printer;
+    protected final Printer printer;
 
     /**
      * Constructor of PrintDescending object

@@ -8,7 +8,7 @@ import labs.util.io.Printer;
  * @author Romzeus
  */
 public class Head extends Command{
-    private final Printer printer;
+    protected final Printer printer;
 
     /**
      * Constructor of Head object

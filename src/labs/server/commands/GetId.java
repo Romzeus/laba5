@@ -1,7 +1,7 @@
 package labs.server.commands;
 
 import labs.commands.Executable;
-import labs.server.Sender;
+import labs.util.io.Sender;
 import labs.util.IdGenerator;
 
 public class GetId implements Executable {

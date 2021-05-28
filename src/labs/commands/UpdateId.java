@@ -15,8 +15,8 @@ import java.util.Iterator;
  * @author Romzeus
  */
 public class UpdateId extends Command{
-    private final ArgumentProvider<String> argumentProvider;
-    private final Printer printer;
+    protected final ArgumentProvider<String> argumentProvider;
+    protected final Printer printer;
 
     /**
      * Constructor of UpdateId object
