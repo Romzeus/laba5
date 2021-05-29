@@ -7,16 +7,22 @@ import labs.util.io.Sender;
 import labs.util.io.ServerPrinter;
 import labs.util.io.ServerScanner;
 import java.io.IOException;
-import java.net.ServerSocket;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
+
 
 public class ServerApp {
     private Socket socket;
     private final ServerInvoker invoker = new ServerInvoker();
     private final ObjectProvider provider = new ObjectProvider();
     private void initSocket() throws IOException {
-        ServerSocket serverSocket = new ServerSocket(15567);
-        socket = serverSocket.accept();
+        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
+        serverSocketChannel.socket().bind(new InetSocketAddress(15567));
+        SocketChannel socketChannel = serverSocketChannel.accept();
+        socket = socketChannel.socket();
+        System.out.println("Есть соединение!");
     }
     private void initIO() throws IOException {
         Sender.setPrinter(new ServerPrinter(socket));
@@ -44,12 +50,15 @@ public class ServerApp {
             socket = null;
         }
         initCommands();
+        Sender.print("Connected!");
         ArrayDequeLoader.setPrinter(Sender::print);
         ArrayDequeLoader.load();
         if(socket != null) {
             while(true) {
                 try {
-                    invoker.activate((String) provider.getArgument());
+                    String command = (String)provider.getArgument();
+                    System.out.println(command);
+                    invoker.activate(command);
                 } catch(NullPointerException exception) {
                     Sender.print("Incorrect command");
                 }

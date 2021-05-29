@@ -38,11 +38,11 @@ public class ServerMessage implements ServerMessageRoute{
         return route;
     }
     @Override
-    public float getDistance() {
+    public Float getDistance() {
         return distance;
     }
     @Override
-    public int getId() {
+    public Integer getId() {
         return id;
     }
     @Override

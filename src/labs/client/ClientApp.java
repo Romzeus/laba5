@@ -1,6 +1,5 @@
 package labs.client;
 
-import labs.client.commands.*;
 import labs.client.commands.Add;
 import labs.client.commands.Clear;
 import labs.client.commands.FilterDistance;
@@ -17,23 +16,25 @@ import labs.util.ArgumentParser;
 import labs.util.ArgumentProvider;
 import labs.util.io.*;
 import labs.util.locale.RussianLocalization;
-
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.Socket;
+import java.net.InetSocketAddress;
+import java.nio.channels.SocketChannel;
 
 public class ClientApp {
-    private Socket socket;
+    private SocketChannel socket;
     private final Scanner scanner = new ConsoleScanner();
     private final ArgumentProvider<String> argumentProvider = new ArgumentParser(scanner);
     private final Invoker invoker = new Invoker();
     private final Printer printer = new TranslatorPrinter(new ConsolePrinter(), new RussianLocalization());
     private void initSocket() throws IOException {
-        socket = new Socket(InetAddress.getLocalHost(), 15567);
+        socket = SocketChannel.open();
+        socket.configureBlocking(false);
+        socket.connect(new InetSocketAddress("localhost", 15567));
+        socket.finishConnect();
     }
     private void initIO() {
-        Sender.setPrinter(new ClientNetPrinter(socket.getChannel()));
-        Receiver.setScanner(new ClientNetScanner(socket.getChannel()));
+        Sender.setPrinter(new ClientNetPrinter(socket));
+        Receiver.setScanner(new ClientNetScanner(socket));
     }
     private void initCommands() {
         invoker.addCommand("add", new Add(argumentProvider));
@@ -57,12 +58,12 @@ public class ClientApp {
             initSocket();
         } catch(IOException exception) {
             printer.print("connection failure");
-        } finally {
             socket = null;
         }
         if(socket != null) {
             initIO();
             initCommands();
+            printer.print(Receiver.getArgument());
             while(true) {
                 try {
                     invoker.activate(argumentProvider.getArgument());

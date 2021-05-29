@@ -3,7 +3,6 @@ package labs.server;
 import labs.send.ServerMessage;
 import labs.util.ArgumentProvider;
 import labs.util.io.Receiver;
-
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -31,8 +30,14 @@ public class ObjectProvider implements ArgumentProvider<Object> {
         if(arguments.isEmpty()) {
             ServerMessage message = Receiver.getServerMessage();
             arguments.add(message.getToken());
-            if(message.getArgument() != null)
-                arguments.add(message.getArgument());
+            if(message.getId() != null)
+                arguments.add(message.getId());
+            if(message.getDistance() != null)
+                arguments.add(message.getDistance());
+            if(message.getName() != null)
+                arguments.add(message.getName());
+            if(message.getRoute() != null)
+                arguments.add(message.getRoute());
         }
     }
 }

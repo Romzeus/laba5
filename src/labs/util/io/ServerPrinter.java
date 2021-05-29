@@ -14,5 +14,6 @@ public class ServerPrinter implements Printer{
     @Override
     public void print(String message) {
         printWriter.println(message);
+        printWriter.flush();
     }
 }
