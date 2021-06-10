@@ -5,7 +5,7 @@ import labs.util.serial.GsonDeserializer;
 
 public class Receiver {
     private static Scanner scanner;
-    private static final GsonDeserializer<ServerMessage> deserializer = new GsonDeserializer<>();
+    private static final GsonDeserializer deserializer = new GsonDeserializer();
     public static void setScanner(Scanner scanner) {
         Receiver.scanner = scanner;
     }

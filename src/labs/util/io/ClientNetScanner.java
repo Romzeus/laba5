@@ -16,13 +16,14 @@ public class ClientNetScanner implements Scanner{
         byteBuffer.clear();
         int read = 0;
         try {
-            read = channel.read(byteBuffer);
+            while(read<=0)
+                read = channel.read(byteBuffer);
         } catch(IOException exception) {
             byteBuffer.clear();
             return exception.getMessage();
         }
-        if(read == -1)
-            return " ";
+//        if(read == -1)
+//            return " ";
         return StandardCharsets.UTF_8.decode(byteBuffer).toString().trim();
     }
 }

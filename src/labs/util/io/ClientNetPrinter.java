@@ -12,6 +12,7 @@ public class ClientNetPrinter implements Printer{
     @Override
     public void print(String message) {
         ByteBuffer byteBuffer = ByteBuffer.wrap(message.getBytes());
+        byteBuffer.compact();
         byteBuffer.flip();
         try {
             channel.write(byteBuffer);
