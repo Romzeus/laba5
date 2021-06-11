@@ -19,6 +19,12 @@ public class User {
             throw new RuntimeException(e);
         }
     }
+    public String getName() {
+        return name;
+    }
+    public String getPassword() {
+        return password;
+    }
     @Override
     public String toString() {return name + " " + password;}
 }

@@ -2,8 +2,10 @@ package labs.send;
 
 
 import labs.structures.Route;
+import labs.structures.User;
 
 public class ServerMessage implements ServerMessageRoute{
+    private User user = null;
     private String serverToken = null;
     private Route route = null;
     private Integer id = null;
@@ -27,6 +29,10 @@ public class ServerMessage implements ServerMessageRoute{
     }
     public ServerMessage setName(String name) {
         this.name = name;
+        return this;
+    }
+    public ServerMessage setUser(User user) {
+        this.user = user;
         return this;
     }
     @Override
@@ -53,4 +59,5 @@ public class ServerMessage implements ServerMessageRoute{
     public String getName() {
         return name;
     }
+    public User getUser(){return user;}
 }
