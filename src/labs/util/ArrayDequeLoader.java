@@ -16,7 +16,7 @@ import java.time.LocalDate;
 public class ArrayDequeLoader {
     public static final String filepath = System.getenv("SERIALIZED_COLLECTION").replace("\\", "\\\\");
     private static LocalDate initTime;
-    private static Printer printer;
+//    private static Printer printer;
     private static ArrayDeque<Route> deserialize(InputStreamReader in) {
         Type type = new TypeToken<ArrayDeque<Route>>(){}.getType();
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -33,22 +33,22 @@ public class ArrayDequeLoader {
                 ArrayDequeManager.addElement(route);
             }
         } catch(IOException|NullPointerException exception) {
-            if(exception instanceof NullPointerException)
-                printer.print("Empty file");
-            else
-                printer.print("Something wrong file");
+//            if(exception instanceof NullPointerException)
+//                printer.print("Empty file");
+//            else
+//                printer.print("Something wrong file");
         } finally {
             initTime = LocalDate.now();
         }
     }
 
-    /**
+/*    //**
      * Method that allows to set Printer for output of exceptions
      * @param printer Printer instance for output of exceptions
-     */
+     /
     public static void setPrinter(Printer printer) {
         ArrayDequeLoader.printer = printer;
-    }
+    }*/
 
     /**
      * Method providing initialization time of collection

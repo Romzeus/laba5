@@ -73,7 +73,13 @@ public class Route implements Comparable<Route>{
     public float getDistance() {
         return distance;
     }
-
+    public Coordinates getCoordinates(){return coordinates;}
+    public Location getLocation() {
+        return location;
+    }
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
     /**
      * Method to change values of fields of this Route
      * @param name Name of Route

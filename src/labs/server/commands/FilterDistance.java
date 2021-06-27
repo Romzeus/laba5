@@ -1,6 +1,7 @@
 package labs.server.commands;
 
 import labs.commands.Executable;
+import labs.util.io.Printer;
 import labs.util.io.Sender;
 import labs.structures.Route;
 import labs.util.ArgumentProvider;
@@ -10,9 +11,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class FilterDistance implements Executable {
+    private Printer printer;
     private final ArgumentProvider<Object> provider;
-    public FilterDistance(ArgumentProvider<Object> provider) {
+    public FilterDistance(ArgumentProvider<Object> provider, Printer printer) {
         this.provider = provider;
+        this.printer = printer;
     }
     @Override
     public void execute() {
@@ -20,6 +23,6 @@ public class FilterDistance implements Executable {
         Float distance = (Float) provider.getArgument();
         String routes;
         routes = stream.sorted().filter(x -> x.getDistance() < distance).map(Objects::toString).collect(Collectors.joining("\n"));
-        Sender.print(routes);
+        printer.print(routes);
     }
 }

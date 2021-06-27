@@ -1,6 +1,10 @@
 package labs.util;
 
+import labs.send.ServerMessage;
 import labs.structures.Route;
+import labs.util.io.Receiver;
+import labs.util.io.Sender;
+import labs.util.serial.Serializer;
 
 /**
  * ID generator for new Route objects
@@ -19,10 +23,7 @@ public class IdGenerator {
      * @return ID value
      */
     public static int getId() {
-        int id = 0;
-        while(checkId(id)) {
-            id++;
-        }
-        return id;
+        Sender.print(Serializer.serialize(new ServerMessage().setServerToken("get_id")));
+        return Integer.parseInt(Receiver.getArgument());
     }
 }

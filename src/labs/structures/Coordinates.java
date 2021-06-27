@@ -32,4 +32,10 @@ public class Coordinates implements Comparable<Coordinates>{
             return -1;
         else return this.y.compareTo(coordinates.y);
     }
+    public Long getY() {
+        return y;
+    }
+    public long getX() {
+        return x;
+    }
 }

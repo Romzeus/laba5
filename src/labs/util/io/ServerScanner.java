@@ -1,5 +1,8 @@
 package labs.util.io;
 
+import labs.send.ServerMessage;
+import labs.util.serial.GsonDeserializer;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,6 +10,7 @@ import java.net.Socket;
 import java.nio.CharBuffer;
 
 public class ServerScanner implements Scanner{
+    private final GsonDeserializer deserializer = new GsonDeserializer();
     private final CharBuffer charBuffer = CharBuffer.allocate(1000);
     private final BufferedReader reader;
     public ServerScanner(Socket socket) throws IOException {
@@ -29,5 +33,8 @@ public class ServerScanner implements Scanner{
         }
         charBuffer.flip();
         return charBuffer.toString().trim();
+    }
+    public ServerMessage getServerMessage() {
+        return deserializer.deserialize(scan());
     }
 }

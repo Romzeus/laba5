@@ -1,6 +1,7 @@
 package labs.server.commands;
 
 import labs.commands.Executable;
+import labs.util.io.Printer;
 import labs.util.io.Sender;
 import labs.structures.Route;
 import labs.util.ArgumentProvider;
@@ -11,9 +12,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StartsWith implements Executable {
+    private Printer printer;
     private final ArgumentProvider<Object> provider;
-    public StartsWith(ArgumentProvider<Object> provider) {
+    public StartsWith(ArgumentProvider<Object> provider, Printer printer) {
         this.provider = provider;
+        this.printer = printer;
     }
 
     @Override
@@ -21,6 +24,6 @@ public class StartsWith implements Executable {
         String starter = (String) provider.getArgument();
         Stream<Route> stream = ArrayDequeManager.getArrayDeque().stream();
         String result = stream.filter(x -> x.getName().startsWith(starter)).map(Objects::toString).collect(Collectors.joining());
-        Sender.print(result);
+        printer.print(result);
     }
 }

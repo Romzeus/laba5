@@ -1,6 +1,7 @@
 package labs.server.commands;
 
 import labs.commands.Executable;
+import labs.util.io.Printer;
 import labs.util.io.Sender;
 import labs.util.ArgumentParser;
 import labs.util.ArgumentProvider;
@@ -17,9 +18,9 @@ public class RemoveId implements Executable {
             return null;
         }
     });
-    public RemoveId(ArgumentProvider<Object> argumentProvider) {
+    public RemoveId(ArgumentProvider<Object> argumentProvider, Printer printer) {
         this.argumentProvider = argumentProvider;
-        removeId = new labs.commands.RemoveId(provider, Sender::print);
+        removeId = new labs.commands.RemoveId(provider, printer);
     }
     @Override
     public void execute() {

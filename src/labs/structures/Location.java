@@ -38,4 +38,13 @@ public class Location implements Comparable<Location>{
             else return this.x.compareTo(location.x);
         }
     }
+    public String getName() {
+        return name;
+    }
+    public Double getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
 }

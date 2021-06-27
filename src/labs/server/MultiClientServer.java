@@ -1,5 +1,6 @@
 package labs.server;
 
+import labs.util.ArrayDequeLoader;
 import labs.util.io.ConsolePrinter;
 import labs.util.io.Printer;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 public class MultiClientServer {
     public void run() {
+        ArrayDequeLoader.load();
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
         Printer printer = new ConsolePrinter();
         ServerSocket serverSocket = null;
