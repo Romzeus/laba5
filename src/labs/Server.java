@@ -1,9 +1,9 @@
 package labs;
 
-import labs.server.ServerApp;
+import labs.server.MultiClientServer;
 
 public class Server {
     public static void main(String[] args) {
-        new ServerApp().run();
+        new MultiClientServer().run();
     }
 }

@@ -14,14 +14,14 @@ public class ArrayDequeManager {
      * Method for adding new Route instances
      * @param route new Route instance
      */
-    public static void addElement(Route route) {
+    public static synchronized void addElement(Route route) {
         arrayDeque.add(route);
     }
 
     /**
      * Method for clearing collection
      */
-    public static void clear() {
+    public static synchronized void clear() {
         arrayDeque.clear();
     }
 
@@ -37,7 +37,7 @@ public class ArrayDequeManager {
      * Method that allows to delete Route instances from collection by their id
      * @param id id value of Route instance to delete
      */
-    public static void delete(int id) {
+    public static synchronized void delete(int id) {
         Route route;
         Iterator<Route> iterator = arrayDeque.iterator();
         while(iterator.hasNext()) {

@@ -7,22 +7,15 @@ import labs.util.io.Sender;
 import labs.util.io.ServerPrinter;
 import labs.util.io.ServerScanner;
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.nio.channels.ServerSocketChannel;
-import java.nio.channels.SocketChannel;
 
 
 public class ServerApp {
     private Socket socket;
     private final ServerInvoker invoker = new ServerInvoker();
     private final ObjectProvider provider = new ObjectProvider();
-    private void initSocket() throws IOException {
-        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
-        serverSocketChannel.socket().bind(new InetSocketAddress(15567));
-        SocketChannel socketChannel = serverSocketChannel.accept();
-        socket = socketChannel.socket();
-        System.out.println("Есть соединение!");
+    public ServerApp(Socket socket) {
+        this.socket = socket;
     }
     private void initIO() throws IOException {
         Sender.setPrinter(new ServerPrinter(socket));
@@ -44,7 +37,6 @@ public class ServerApp {
     }
     public void run() {
         try {
-            initSocket();
             initIO();
         } catch(IOException exception) {
             socket = null;

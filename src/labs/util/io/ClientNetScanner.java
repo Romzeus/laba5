@@ -16,7 +16,7 @@ public class ClientNetScanner implements Scanner{
         byteBuffer.clear();
         int read = 0;
         try {
-            while(read<=0)
+            while(read != 0)
                 read = channel.read(byteBuffer);
         } catch(IOException exception) {
             byteBuffer.clear();
