@@ -2,28 +2,16 @@ package labs.server;
 
 import labs.structures.Route;
 import labs.structures.User;
-import labs.util.io.Printer;
-import labs.util.io.Sender;
 import java.sql.*;
 
 public class DBService {
-//    private static final Printer printer = Sender::print;
     private static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/pg";
     private static final String USER = "s289916";
     private static final String PASS = "taj026";
     private static Connection connection;
-    public static void initDBConnection() {
-        try {
-            DriverManager.registerDriver(new org.postgresql.Driver());
-        } catch (SQLException e) {
-//            printer.print("JDBC Driver is not found");
-            return;
-        }
-        try {
-            connection = DriverManager.getConnection(DB_URL, USER, PASS);
-        } catch (SQLException e) {
-//            printer.print("Connection Failed");
-        }
+    public static void initDBConnection() throws SQLException {
+        DriverManager.registerDriver(new org.postgresql.Driver());
+        connection = DriverManager.getConnection(DB_URL, USER, PASS);
     }
     public static void putEntry(Route route) {
         PreparedStatement entryPutter = null;
@@ -48,28 +36,25 @@ public class DBService {
             return null;
         }
     }
-    public static void addUser(User user) {
+    public static void addUser(User user) throws SQLException{
         PreparedStatement newUserEntry = null;
-        try {
-            newUserEntry = connection.prepareStatement("INSERT INTO USERS (USER, PASSWORD) VALUES (?, ?)");
-            newUserEntry.setString(1, user.getName());
-            newUserEntry.setString(2, user.getPassword());
-            newUserEntry.executeQuery();
-        } catch(SQLException e) {
-//            printer.print("Something gone wrong");
-        }
+        newUserEntry = connection.prepareStatement("INSERT INTO USERS (USER, PASSWORD, SALT) VALUES (?, ?, ?)");
+        newUserEntry.setString(1, user.getName());
+        newUserEntry.setString(2, user.getPassword());
+        newUserEntry.setString(3, user.getSalt());
+        newUserEntry.executeQuery();
     }
     public static boolean checkUser(User user) {
-        PreparedStatement checkUser = null;
+        PreparedStatement checkUser;
         int count;
         try {
-            checkUser = connection.prepareStatement("SELECT COUNT(*) FROM USERS WHERE USER=? AND PASSWORD=?");
+            checkUser = connection.prepareStatement("SELECT COUNT(*) FROM USERS WHERE USER=? AND PASSWORD=? AND SALT=?");
             checkUser.setString(1, user.getName());
             checkUser.setString(2, user.getPassword());
+            checkUser.setString(3, user.getSalt());
             ResultSet result = checkUser.executeQuery();
-            count = (Integer)(result.getInt(1));
+            count = result.getInt(1);
         } catch(SQLException e) {
-//            printer.print("Something gone wrong");
             return false;
         }
         return count > 0;
