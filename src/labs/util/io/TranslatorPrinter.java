@@ -1,23 +1,25 @@
 package labs.util.io;
 
-import labs.util.locale.Localization;
+import java.util.Locale;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 /**
- * Wrapper for Printer instance which allows to use localization objects
+ * Wrapper for Printer instance which allows to use localization
  * @author Romzeus
  */
 public class TranslatorPrinter implements Printer{
-    private final Localization localization;
+    private ResourceBundle bundle;
     private final Printer printer;
 
     /**
      * Constructor of TranslatorPrinter
      * @param printer Printer instance that will be wrapped
-     * @param localization Localization instance
+     * @param locale Localization instance
      */
-    public TranslatorPrinter(Printer printer, Localization localization) {
+    public TranslatorPrinter(Printer printer, Locale locale) {
         this.printer = printer;
-        this.localization = localization;
+        this.bundle = ResourceBundle.getBundle("labs.util.locale.Language", locale);
     }
 
     /**
@@ -26,9 +28,7 @@ public class TranslatorPrinter implements Printer{
      */
     @Override
     public void print(String message) {
-        if(localization.translate(message) != null)
-            printer.print(localization.translate(message));
-        else
-            printer.print(message);
+        String translation = (bundle.containsKey(message) ? bundle.getString(message) : message);
+        printer.print(translation);
     }
 }

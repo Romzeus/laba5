@@ -15,17 +15,18 @@ import labs.commands.*;
 import labs.util.ArgumentParser;
 import labs.util.ArgumentProvider;
 import labs.util.io.*;
-import labs.util.locale.RussianLocalization;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.SocketChannel;
+import java.util.Locale;
 
 public class ClientApp {
     private SocketChannel socket;
     private final Scanner scanner = new ConsoleScanner();
     private final ArgumentProvider<String> argumentProvider = new ArgumentParser(scanner);
     private final Invoker invoker = new Invoker();
-    private final Printer printer = new TranslatorPrinter(new ConsolePrinter(), new RussianLocalization());
+    private final Printer printer = new TranslatorPrinter(new ConsolePrinter(), new Locale("ru"));
     private void initSocket() throws IOException {
         socket = SocketChannel.open();
         socket.configureBlocking(false);
