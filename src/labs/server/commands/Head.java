@@ -2,7 +2,7 @@ package labs.server.commands;
 
 import labs.commands.Executable;
 import labs.util.io.Printer;
-import labs.util.io.Sender;
+import labs.util.io.Printer;
 import labs.structures.Route;
 import labs.util.ArrayDequeManager;
 
@@ -19,6 +19,6 @@ public class Head implements Executable {
             message = head.toString();
         else
             message = "No elements";
-        Sender.print(message);
+        printer.print(message);
     }
 }

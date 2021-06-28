@@ -26,6 +26,9 @@ public class ClientApp {
     private final ArgumentProvider<String> argumentProvider = new ArgumentParser(scanner);
     private final Invoker invoker = new Invoker();
     private final Printer printer = new TranslatorPrinter(new ConsolePrinter(), new RussianLocalization());
+    private Printer netPrinter;
+    private Scanner netScanner;
+    private final ArgumentProvider<String> netProvider = new ArgumentParser(netScanner);
     private void initSocket() throws IOException {
         socket = SocketChannel.open();
         socket.configureBlocking(false);
@@ -33,23 +36,23 @@ public class ClientApp {
         socket.finishConnect();
     }
     private void initIO() {
-        Sender.setPrinter(new ClientNetPrinter(socket));
-        Receiver.setScanner(new ClientNetScanner(socket));
+        netPrinter = new ClientNetPrinter(socket);
+        netScanner = new ClientNetScanner(socket);
     }
     private void initCommands() {
-        invoker.addCommand("add", new Add(argumentProvider));
-        invoker.addCommand("clear", new Clear());
+        invoker.addCommand("add", new Add(argumentProvider, netPrinter));
+        invoker.addCommand("clear", new Clear(netPrinter));
         invoker.addCommand("exit", new Exit());
         invoker.addCommand("execute_script", new ExecuteScript(invoker, argumentProvider, printer));
-        invoker.addCommand("filter_less_than_distance", new FilterDistance(argumentProvider, printer));
-        invoker.addCommand("head", new Head(printer));
-        invoker.addCommand("info", new Info(printer));
-        invoker.addCommand("print_descending", new PrintDescending(printer));
-        invoker.addCommand("remove", new RemoveId(argumentProvider, printer));
-        invoker.addCommand("remove_lower", new RemoveLower(argumentProvider));
-        invoker.addCommand("show", new Show(printer));
-        invoker.addCommand("filter_starts_with_name", new StartsWith(argumentProvider, printer));
-        invoker.addCommand("update", new UpdateId(argumentProvider, printer));
+        invoker.addCommand("filter_less_than_distance", new FilterDistance(argumentProvider, printer, netPrinter, netProvider));
+        invoker.addCommand("head", new Head(printer, netPrinter, netProvider));
+        invoker.addCommand("info", new Info(printer, netPrinter, netProvider));
+        invoker.addCommand("print_descending", new PrintDescending(printer, netPrinter, netProvider));
+        invoker.addCommand("remove", new RemoveId(argumentProvider, printer, netPrinter));
+        invoker.addCommand("remove_lower", new RemoveLower(argumentProvider, netPrinter));
+        invoker.addCommand("show", new Show(printer, netPrinter, netProvider));
+        invoker.addCommand("filter_starts_with_name", new StartsWith(argumentProvider, printer, netPrinter, netProvider));
+        invoker.addCommand("update", new UpdateId(argumentProvider, printer, netPrinter));
         invoker.addCommand("history", new History(printer));
         invoker.addCommand("help", new Help(invoker.getCommands().values(), printer));
     }

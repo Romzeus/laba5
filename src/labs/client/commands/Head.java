@@ -1,18 +1,21 @@
 package labs.client.commands;
 
 import labs.send.ServerMessage;
+import labs.util.ArgumentProvider;
 import labs.util.io.Printer;
-import labs.util.io.Receiver;
-import labs.util.io.Sender;
 import labs.util.serial.Serializer;
 
 public class Head extends labs.commands.Head {
-    public Head(Printer printer) {
+    private Printer netPrinter;
+    private ArgumentProvider<String> netProvider;
+    public Head(Printer printer, Printer netPrinter, ArgumentProvider<String> netProvider) {
         super(printer);
+        this.netPrinter = netPrinter;
+        this.netProvider = netProvider;
     }
     @Override
     public void execute() {
-        Sender.print(Serializer.serialize(new ServerMessage().setServerToken("head")));
-        printer.print(Receiver.getArgument());
+        netPrinter.print(Serializer.serialize(new ServerMessage().setServerToken("head")));
+        printer.print(netProvider.getArgument());
     }
 }
