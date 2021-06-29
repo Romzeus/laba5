@@ -26,7 +26,7 @@ public class ExecuteScript extends Command{
      * @param printer Instance of Printer interface for output of possible exceptions
      */
     public ExecuteScript(Executor executor, ArgumentProvider<String> argumentProvider, Printer printer) {
-        super("execute_script", "execute_script description");
+        super("execute_script", "execute_script_description");
         this.invoker = executor;
         this.argumentProvider = argumentProvider;
         this.printer = printer;

@@ -24,7 +24,7 @@ public class UpdateId extends Command{
      * @param printer Object of Printer interface
      */
     public UpdateId(ArgumentProvider<String> argumentProvider, Printer printer) {
-        super("update", "Update description");
+        super("update", "Update_description");
         this.argumentProvider = argumentProvider;
         this.printer = printer;
     }

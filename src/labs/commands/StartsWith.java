@@ -18,7 +18,7 @@ public class StartsWith extends Command{
      * @param printer Object of Printer interface
      */
     public StartsWith(ArgumentProvider<String> argumentProvider, Printer printer) {
-        super("filter_starts_with_name", "filter_starts_with_name description");
+        super("filter_starts_with_name", "filter_starts_with_name_description");
         this.printer = printer;
         this.argumentProvider = argumentProvider;
     }

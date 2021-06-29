@@ -6,7 +6,7 @@ package labs.commands;
  */
 public class Exit extends Command{
     public Exit() {
-        super("exit", "exit description");
+        super("exit", "exit_description");
     }
     @Override
     public void execute() {

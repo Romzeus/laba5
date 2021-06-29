@@ -19,7 +19,7 @@ public class RemoveLower extends Command{
      * @param argumentProvider Object of ArgumentProvider interface, which will provide arguments
      */
     public RemoveLower(ArgumentProvider<String> argumentProvider) {
-        super("remove_lower", "remove_lower description");
+        super("remove_lower", "remove_lower_description");
         this.argumentProvider = argumentProvider;
     }
     @Override

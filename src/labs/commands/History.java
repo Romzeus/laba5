@@ -16,7 +16,7 @@ public class History extends Command{
      * @param printer Object of Printer interface
      */
     public History(Printer printer) {
-        super("history", "history description");
+        super("history", "history_description");
         this.printer = printer;
     }
     @Override

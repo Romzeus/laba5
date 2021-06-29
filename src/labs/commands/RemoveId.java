@@ -18,7 +18,7 @@ public class RemoveId extends Command{
      * @param printer Object of Printer interface
      */
     public RemoveId(ArgumentProvider<String> argumentProvider, Printer printer) {
-        super("remove_by_id", "remove_by_id description");
+        super("remove_by_id", "remove_by_id_description");
         this.argumentProvider = argumentProvider;
         this.printer = printer;
     }

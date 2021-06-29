@@ -16,7 +16,7 @@ public class Add extends Command{
      * @param argumentProvider Object of ArgumentProvider interface, which will provide arguments for creating Route object
      */
     public Add(ArgumentProvider<String> argumentProvider) {
-        super("add", "add description");
+        super("add", "add_description");
         this.argumentProvider = argumentProvider;
     }
     @Override

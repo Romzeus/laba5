@@ -58,7 +58,7 @@ public class ClientApp {
         try {
             initSocket();
         } catch(IOException exception) {
-            printer.print("connection failure");
+            printer.print("connection_failure");
             socket = null;
         }
         if(socket != null) {
@@ -69,7 +69,7 @@ public class ClientApp {
                 try {
                     invoker.activate(argumentProvider.getArgument());
                 } catch(IllegalArgumentException exception) {
-                    printer.print("Incorrect command");
+                    printer.print("Incorrect_command");
                 }
             }
         }

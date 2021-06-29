@@ -16,7 +16,7 @@ public class Show extends Command{
      * @param printer Object of Printer interface
      */
     public Show(Printer printer) {
-        super("show", "show description");
+        super("show", "show_description");
         this.printer = printer;
     }
     @Override

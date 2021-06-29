@@ -15,7 +15,7 @@ public class Head extends Command{
      * @param printer Object of Printer interface
      */
     public Head(Printer printer) {
-        super("head", "head description");
+        super("head", "head_description");
         this.printer = printer;
     }
     @Override

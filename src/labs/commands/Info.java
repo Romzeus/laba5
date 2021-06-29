@@ -16,7 +16,7 @@ public class Info extends Command{
      * @param printer Object of Printer interface
      */
     public Info(Printer printer) {
-        super("info", "info description");
+        super("info", "info_description");
         this.printer = printer;
     }
     @Override

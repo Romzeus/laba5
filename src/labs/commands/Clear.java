@@ -7,7 +7,7 @@ import labs.util.ArrayDequeManager;
  */
 public class Clear extends Command{
     public Clear() {
-        super("clear", "clear description");
+        super("clear", "clear_description");
     }
     @Override
     public void execute() {

@@ -17,7 +17,7 @@ public class Save extends Command{
      * @param filePrinter Object of FilePrinter class, which will write serialized objects to json file
      */
     public Save(FilePrinter filePrinter) {
-        super("save", "save description");
+        super("save", "save_description");
         this.filePrinter = filePrinter;
     }
     @Override
