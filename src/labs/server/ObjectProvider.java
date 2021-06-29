@@ -3,10 +3,18 @@ package labs.server;
 import labs.send.ServerMessage;
 import labs.util.ArgumentProvider;
 import labs.util.io.Receiver;
+import labs.util.io.Scanner;
+import labs.util.serial.GsonDeserializer;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class ObjectProvider implements ArgumentProvider<Object> {
+    private final Scanner netScanner;
+    private final GsonDeserializer deserializer = new GsonDeserializer();
+    public ObjectProvider(Scanner netScanner) {
+        this.netScanner = netScanner;
+    }
     private final Deque<Object> arguments = new ArrayDeque<>();
     @Override
     public Object getArgument() {
@@ -28,7 +36,7 @@ public class ObjectProvider implements ArgumentProvider<Object> {
     }
     public void prepare() {
         if(arguments.isEmpty()) {
-            ServerMessage message = Receiver.getServerMessage();
+            ServerMessage message = deserializer.deserialize(netScanner.scan());
             arguments.add(message.getToken());
             if(message.getId() != null)
                 arguments.add(message.getId());

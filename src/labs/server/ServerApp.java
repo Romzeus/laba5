@@ -9,15 +9,14 @@ import java.net.Socket;
 public class ServerApp {
     private Socket socket;
     private ServerPrinter printer;
-    private ServerScanner scanner;
     private final ServerInvoker invoker = new ServerInvoker();
-    private final ObjectProvider provider = new ObjectProvider();
+    private ObjectProvider provider;
     public ServerApp(Socket socket) {
         this.socket = socket;
     }
     private void initIO() throws IOException {
         printer = new ServerPrinter(socket);
-        scanner = new ServerScanner(socket);
+        provider = new ObjectProvider(new ServerScanner(socket));
     }
     private void initCommands() {
         invoker.addCommand("add", new Add(provider));
@@ -47,7 +46,7 @@ public class ServerApp {
                     System.out.println(command);
                     invoker.activate(command);
                 } catch(NullPointerException exception) {
-                    Sender.print("Incorrect command");
+                    Sender.print("Incorrect_command");
                 }
             }
         }
