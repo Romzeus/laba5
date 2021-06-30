@@ -30,7 +30,7 @@ public class ClientApp {
     private void initSocket() throws IOException {
         socket = SocketChannel.open();
         socket.configureBlocking(false);
-        socket.connect(new InetSocketAddress("localhost", 15567));
+        socket.connect(new InetSocketAddress("localhost", 15568));
         socket.finishConnect();
     }
     private void initIO() {

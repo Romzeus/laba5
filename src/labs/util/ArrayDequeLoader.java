@@ -3,7 +3,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import labs.structures.Route;
-import labs.util.io.Printer;
+//import labs.util.io.Printer;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayDeque;
@@ -42,13 +42,13 @@ public class ArrayDequeLoader {
         }
     }
 
-/*    //**
-     * Method that allows to set Printer for output of exceptions
-     * @param printer Printer instance for output of exceptions
-     /
-    public static void setPrinter(Printer printer) {
-        ArrayDequeLoader.printer = printer;
-    }*/
+//    /**
+//     * Method that allows to set Printer for output of exceptions
+//     * @param printer Printer instance for output of exceptions
+//     */
+//    public static void setPrinter(Printer printer) {
+//        ArrayDequeLoader.printer = printer;
+//    }
 
     /**
      * Method providing initialization time of collection

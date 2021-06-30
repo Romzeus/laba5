@@ -1,4 +1,6 @@
 package labs.util;
+
+import labs.server.DBService;
 import labs.structures.Route;
 import java.util.ArrayDeque;
 import java.util.Iterator;
@@ -16,6 +18,7 @@ public class ArrayDequeManager {
      */
     public static synchronized void addElement(Route route) {
         arrayDeque.add(route);
+        DBService.putEntry(route);
     }
 
     /**
@@ -44,6 +47,7 @@ public class ArrayDequeManager {
             route = iterator.next();
             if(route.getId() == id) {
                 iterator.remove();
+                DBService.delete(id);
                 return;
             }
         }

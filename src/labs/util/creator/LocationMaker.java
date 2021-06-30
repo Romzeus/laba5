@@ -25,7 +25,7 @@ public class LocationMaker implements Creator<Location> {
      * @return Location object
      */
     public Location make() {
-        printer.print("Write x coordinate");
+//        printer.print("Write x coordinate");
         Double x = null;
         while (x == null) {
             try {
@@ -35,11 +35,11 @@ public class LocationMaker implements Creator<Location> {
                 x = null;
             }
             if (x == null) {
-                printer.print("X coordinate not null");
-                printer.print("Try again");
+//                printer.print("X coordinate not null");
+//                printer.print("Try again");
             }
         }
-        printer.print("Write y coordinate");
+//        printer.print("Write y coordinate");
         int y;
         try {
             y = Integer.parseInt(argumentProvider.getArgument());
@@ -47,7 +47,7 @@ public class LocationMaker implements Creator<Location> {
             printer.print(exception.toString());
             y = 0;
         }
-        printer.print("Write name");
+//        printer.print("Write name");
         String name = null;
         while(name == null) {
             try {
@@ -56,8 +56,8 @@ public class LocationMaker implements Creator<Location> {
                 name = null;
             }
             if(name == null) {
-                printer.print("Name not null");
-                printer.print("Try again");
+//                printer.print("Name not null");
+//                printer.print("Try again");
             }
         }
         return new Location(x, y, name);

@@ -31,7 +31,7 @@ public class RouteMaker implements Creator<Route> {
      */
     @Override
     public Route make() {
-        printer.print("Write name");
+//        printer.print("Write name");
         String name = null;
         while(name == null) {
             try {
@@ -40,11 +40,11 @@ public class RouteMaker implements Creator<Route> {
                 name = null;
             }
             if(name == null) {
-                printer.print("Name not null");
-                printer.print("Try again");
+//                printer.print("Name not null");
+//                printer.print("Try again");
             }
         }
-        printer.print("Write distance");
+//        printer.print("Write distance");
         Float distance = 0f;
         while(distance < 1f) {
             try {
@@ -55,12 +55,12 @@ public class RouteMaker implements Creator<Route> {
                     break;
                 }
                 if(exception instanceof NumberFormatException) {
-                    printer.print("Wrong format");
-                    printer.print("Try again");
+//                    printer.print("Wrong format");
+//                    printer.print("Try again");
                     distance = 0f;
                 } else if(distance < 1f){
-                    printer.print("Distance not less than 1");
-                    printer.print("Try again");
+//                    printer.print("Distance not less than 1");
+//                    printer.print("Try again");
                 }
             }
         }

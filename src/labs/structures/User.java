@@ -16,14 +16,7 @@ public class User {
         random.nextBytes(salt);
         textSalt = new String(salt);
         this.name = name;
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-224");
-            byte[] bytes = md.digest((password + textSalt).getBytes(StandardCharsets.UTF_8));
-            BigInteger no = new BigInteger(1, bytes);
-            password = no.toString(16);
-        } catch(NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
+        this.password = password;
     }
     public String getName() {
         return name;

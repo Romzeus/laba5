@@ -17,7 +17,7 @@ public class MultiClientServer {
         ServerSocket serverSocket = null;
         Socket socket;
         try {
-            serverSocket = new ServerSocket(15567);
+            serverSocket = new ServerSocket(15568);
         } catch(IOException exception) {
             printer.print(exception.getMessage());
             return;

@@ -2,6 +2,11 @@ package labs.server;
 
 import labs.structures.Route;
 import labs.structures.User;
+
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 
 public class DBService {
@@ -16,11 +21,17 @@ public class DBService {
     public static void putEntry(Route route) {
         PreparedStatement entryPutter = null;
         try {
-            entryPutter = connection.prepareStatement("INSERT INTO ROUTES (ID, NAME, TIME, DISTANCE, XCOORDINATES, " +
-                    "YCOORDINATES, LOCATIONNAME, XLOCCOOR, YLOCCOOR, USER) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
-            entryPutter.setString(2, route.getName());
-
+            entryPutter = connection.prepareStatement("INSERT INTO ROUTES (NAME, TIME, DISTANCE, XCOORDINATES, " +
+                    "YCOORDINATES, LOCATIONNAME, XLOCCOOR, YLOCCOOR) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            entryPutter.setString(1, route.getName());
+            entryPutter.setDate(2, Date.valueOf(route.getCreationDate()));
+            entryPutter.setFloat(3, route.getDistance());
+            entryPutter.setLong(4, route.getCoordinates().getX());
+            entryPutter.setLong(5, route.getCoordinates().getY());
+            entryPutter.setString(6, route.getLocation().getName());
+            entryPutter.setDouble(7, route.getLocation().getX());
+            entryPutter.setInt(8, route.getLocation().getY());
+            entryPutter.executeQuery();
         } catch(SQLException exception) {
 //            printer.print("Something gone wrong");
             return;
@@ -36,27 +47,54 @@ public class DBService {
             return null;
         }
     }
-    public static void addUser(User user) throws SQLException{
+    public static ResultSet getRoutes() {
+        Statement getter = null;
+        try {
+            return getter.executeQuery("SELECT * FROM ROUTES");
+        } catch(SQLException exception) {
+            return null;
+        }
+    }
+    public static void addUser(User user) throws SQLException, NoSuchAlgorithmException{
         PreparedStatement newUserEntry = null;
+        String hashedPassword;
+        MessageDigest md = MessageDigest.getInstance("SHA-224");
+        byte[] bytes = md.digest((user.getPassword() + user.getSalt()).getBytes(StandardCharsets.UTF_8));
+        BigInteger no = new BigInteger(1, bytes);
+        hashedPassword = no.toString(16);
         newUserEntry = connection.prepareStatement("INSERT INTO USERS (USER, PASSWORD, SALT) VALUES (?, ?, ?)");
         newUserEntry.setString(1, user.getName());
-        newUserEntry.setString(2, user.getPassword());
+        newUserEntry.setString(2, hashedPassword);
         newUserEntry.setString(3, user.getSalt());
         newUserEntry.executeQuery();
     }
     public static boolean checkUser(User user) {
         PreparedStatement checkUser;
-        int count;
+        String hashedPassword;
+        String salt;
+        String password;
         try {
-            checkUser = connection.prepareStatement("SELECT COUNT(*) FROM USERS WHERE USER=? AND PASSWORD=? AND SALT=?");
+            checkUser = connection.prepareStatement("SELECT PASSWORD, SALT FROM USERS WHERE USER=?");
             checkUser.setString(1, user.getName());
-            checkUser.setString(2, user.getPassword());
-            checkUser.setString(3, user.getSalt());
             ResultSet result = checkUser.executeQuery();
-            count = result.getInt(1);
-        } catch(SQLException e) {
+            password = result.getString(1);
+            salt = result.getString(2);
+            MessageDigest md = MessageDigest.getInstance("SHA-224");
+            byte[] bytes = md.digest((password + salt).getBytes(StandardCharsets.UTF_8));
+            BigInteger no = new BigInteger(1, bytes);
+            hashedPassword = no.toString(16);
+        } catch(SQLException|NoSuchAlgorithmException e) {
             return false;
         }
-        return count > 0;
+        return user.getPassword().equals(hashedPassword);
+    }
+    public static void delete(int id) {
+        PreparedStatement del;
+        try {
+            del = connection.prepareStatement("DELETE FROM ROUTES WHERE ID=?");
+            del.setInt(1, id);
+        } finally {
+            return;
+        }
     }
 }
