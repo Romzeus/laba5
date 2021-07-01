@@ -1,30 +1,53 @@
 package labs.client.windows;
 
+import labs.send.ServerMessage;
+import labs.structures.User;
+import labs.util.ArgumentProvider;
+import labs.util.io.Printer;
+import labs.util.serial.Serializer;
+
 import javax.swing.*;
 
 public class RegisterWindow extends JFrame {
-    public RegisterWindow() {
+    public RegisterWindow(Printer printer, ArgumentProvider<String> provider) {
         super("Register");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-//        panel.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
+        SpringLayout layout = new SpringLayout();
+        panel.setLayout(layout);
         JTextField nameField = new JTextField(15);
         nameField.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
         JPasswordField passwordField = new JPasswordField(15);
         passwordField.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
         JButton submitButton = new JButton("submit");
+        submitButton.addActionListener(x -> {
+            User user = new User(nameField.getText(), passwordField.getText());
+            printer.print(Serializer.serialize(new ServerMessage().setUser(user).setServerToken("add_user")));
+        });
         submitButton.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
         JButton registerButton = new JButton("register");
         registerButton.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
+        registerButton.addActionListener(x -> {
+            User user = new User(nameField.getText(), passwordField.getText());
+            printer.print(Serializer.serialize(new ServerMessage().setUser(user).setServerToken("check_user")));
+            if(Integer.parseInt(provider.getArgument())==1)
+                printer.print("true");
+            else printer.print("false");
+        });
         panel.add(nameField);
         panel.add(passwordField);
         panel.add(submitButton);
         panel.add(registerButton);
+        layout.putConstraint(SpringLayout.WEST, nameField, 10, SpringLayout.WEST, panel);
+        layout.putConstraint(SpringLayout.WEST, passwordField, 10, SpringLayout.WEST, panel);
+        layout.putConstraint(SpringLayout.WEST, submitButton, 10, SpringLayout.WEST, panel);
+        layout.putConstraint(SpringLayout.WEST, registerButton, 20, SpringLayout.EAST, submitButton);
+        layout.putConstraint(SpringLayout.NORTH, submitButton, 10, SpringLayout.SOUTH, passwordField);
+        layout.putConstraint(SpringLayout.NORTH, nameField, 10, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.NORTH, passwordField, 10, SpringLayout.SOUTH, nameField);
+        layout.putConstraint(SpringLayout.NORTH, registerButton, 0, SpringLayout.NORTH, submitButton);
         this.add(panel);
+        this.setBounds(0,0,400,300);
         this.setVisible(true);
-    }
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(RegisterWindow::new);
     }
 }
