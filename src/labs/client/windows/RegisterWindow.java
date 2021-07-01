@@ -1,5 +1,6 @@
 package labs.client.windows;
 
+import labs.commands.Executable;
 import labs.send.ServerMessage;
 import labs.structures.User;
 import labs.util.ArgumentProvider;
@@ -7,11 +8,13 @@ import labs.util.io.Printer;
 import labs.util.serial.Serializer;
 
 import javax.swing.*;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class RegisterWindow extends JFrame {
-    public RegisterWindow(Printer printer, ArgumentProvider<String> provider) {
+    public RegisterWindow(Printer printer, ArgumentProvider<String> provider, Executable add, Executable delete, Executable history) {
         super("Register");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         JPanel panel = new JPanel();
         SpringLayout layout = new SpringLayout();
         panel.setLayout(layout);
@@ -21,8 +24,9 @@ public class RegisterWindow extends JFrame {
         passwordField.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
         JButton submitButton = new JButton("submit");
         submitButton.addActionListener(x -> {
-            User user = new User(nameField.getText(), passwordField.getText());
-            printer.print(Serializer.serialize(new ServerMessage().setUser(user).setServerToken("add_user")));
+            Deque<String> arg = new ArrayDeque<String>();
+            arg.push("1");
+            provider.addArguments(arg);
         });
         submitButton.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
         JButton registerButton = new JButton("register");
@@ -31,8 +35,8 @@ public class RegisterWindow extends JFrame {
             User user = new User(nameField.getText(), passwordField.getText());
             printer.print(Serializer.serialize(new ServerMessage().setUser(user).setServerToken("check_user")));
             if(Integer.parseInt(provider.getArgument())==1)
-                printer.print("true");
-            else printer.print("false");
+            SwingUtilities.invokeLater(() -> new MainWindow(provider, add, history, delete));
+//            else printer.print("false");
         });
         panel.add(nameField);
         panel.add(passwordField);

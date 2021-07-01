@@ -10,9 +10,9 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 
 public class DBService {
-    private static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/pg";
-    private static final String USER = "s289916";
-    private static final String PASS = "taj026";
+    private static final String DB_URL = "jdbc:postgresql://127.0.0.1:15567/postgres";
+    private static final String USER = "postgres";
+    private static final String PASS = "zxc00ZXC";
     private static Connection connection;
     public static void initDBConnection() throws SQLException {
         DriverManager.registerDriver(new org.postgresql.Driver());

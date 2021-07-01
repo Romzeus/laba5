@@ -11,11 +11,13 @@ import labs.client.commands.RemoveLower;
 import labs.client.commands.Show;
 import labs.client.commands.StartsWith;
 import labs.client.commands.UpdateId;
+import labs.client.windows.RegisterWindow;
+import labs.client.windows.TableWindow;
 import labs.commands.*;
 import labs.util.ArgumentParser;
 import labs.util.ArgumentProvider;
 import labs.util.io.*;
-
+import javax.swing.*;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.SocketChannel;
@@ -26,7 +28,7 @@ public class ClientApp {
     private final Scanner scanner = new ConsoleScanner();
     private final ArgumentProvider<String> argumentProvider = new ArgumentParser(scanner);
     private final Invoker invoker = new Invoker();
-    private final Printer printer = new TranslatorPrinter(new ConsolePrinter(), new Locale("ru"));
+    private final Printer printer = new TranslatorPrinter(new MessagePrinter(), new Locale("ru"));
     private void initSocket() throws IOException {
         socket = SocketChannel.open();
         socket.configureBlocking(false);
@@ -64,14 +66,8 @@ public class ClientApp {
         if(socket != null) {
             initIO();
             initCommands();
-            printer.print(Receiver.getArgument());
-            while(true) {
-                try {
-                    invoker.activate(argumentProvider.getArgument());
-                } catch(IllegalArgumentException exception) {
-                    printer.print("Incorrect_command");
-                }
-            }
+            SwingUtilities.invokeLater(() -> new RegisterWindow(Sender::print, argumentProvider, invoker.getCommands().get("add"),
+                    invoker.getCommands().get("history"), invoker.getCommands().get("remove")));
         }
     }
 }
