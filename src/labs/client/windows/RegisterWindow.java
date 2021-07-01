@@ -33,10 +33,8 @@ public class RegisterWindow extends JFrame {
         registerButton.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
         registerButton.addActionListener(x -> {
             User user = new User(nameField.getText(), passwordField.getText());
-            printer.print(Serializer.serialize(new ServerMessage().setUser(user).setServerToken("check_user")));
-            if(Integer.parseInt(provider.getArgument())==1)
+            printer.print(Serializer.serialize(new ServerMessage().setUser(user).setServerToken("add_user")));
             SwingUtilities.invokeLater(() -> new MainWindow(provider, add, history, delete));
-//            else printer.print("false");
         });
         panel.add(nameField);
         panel.add(passwordField);

@@ -1,9 +1,9 @@
 package labs.client.windows;
 
+import labs.client.MessageReceiver;
 import labs.commands.Executable;
 import labs.util.ArgumentProvider;
 import javax.swing.*;
-import java.awt.*;
 
 public class MainWindow extends JFrame {
     private JTable table;
@@ -59,7 +59,7 @@ public class MainWindow extends JFrame {
     public void initializeTable(String[][] data) {
         String[] columnNames = {"NAME", "TIME", "DISTANCE", "XCOORDINATES", "YCOORDINATES", "LOCATIONNAME", "XLOCCOOR,",
                 "YLOCCOOR"};
-        String[][] tableData = {{" ", " ", " ", " ", " ", " ", " ", " "}};
+        String[][] tableData = MessageReceiver.scan().getData();/*{{" ", " ", " ", " ", " ", " ", " ", " "}};*/
         if(data.length != 0)
             tableData = data;
         this.table = new JTable(tableData, columnNames);

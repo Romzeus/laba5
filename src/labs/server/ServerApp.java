@@ -31,6 +31,7 @@ public class ServerApp {
         invoker.addCommand("show", new Show(printer));
         invoker.addCommand("filter_starts_with_name", new StartsWith(provider, printer));
         invoker.addCommand("update", new UpdateId(provider));
+        invoker.addCommand("add_user", new AddUser(provider));
     }
     public void run() {
         try {

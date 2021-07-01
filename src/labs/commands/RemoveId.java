@@ -28,13 +28,13 @@ public class RemoveId extends Command{
         try {
         id = Integer.parseInt(argumentProvider.getArgument());
         } catch(NullPointerException|NumberFormatException exception) {
-            printer.print("Wrong id format");
+            printer.print("Wrong_id_format");
             return;
         }
         try {
         ArrayDequeManager.delete(id);
         } catch(IllegalArgumentException exception) {
-            printer.print("No id");
+            printer.print("No_id");
         }
     }
 }
