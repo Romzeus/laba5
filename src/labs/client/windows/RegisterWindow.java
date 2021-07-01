@@ -1,19 +1,17 @@
 package labs.client.windows;
 
+import labs.client.MessageReceiver;
 import labs.commands.Executable;
 import labs.send.ServerMessage;
 import labs.structures.User;
 import labs.util.ArgumentProvider;
 import labs.util.io.Printer;
 import labs.util.serial.Serializer;
-
 import javax.swing.*;
-import java.util.ArrayDeque;
-import java.util.Deque;
 
 public class RegisterWindow extends JFrame {
-    public RegisterWindow(Printer printer, ArgumentProvider<String> provider, Executable add, Executable delete, Executable history) {
-        super("Register");
+    public RegisterWindow(Printer printer, ArgumentProvider<String> provider, Executable add, Executable delete, Executable history, Executable show) {
+        super("Registration");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         JPanel panel = new JPanel();
         SpringLayout layout = new SpringLayout();
@@ -22,19 +20,20 @@ public class RegisterWindow extends JFrame {
         nameField.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
         JPasswordField passwordField = new JPasswordField(15);
         passwordField.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
-        JButton submitButton = new JButton("submit");
+        JButton submitButton = new JButton("LogIn");
         submitButton.addActionListener(x -> {
-            Deque<String> arg = new ArrayDeque<String>();
-            arg.push("1");
-            provider.addArguments(arg);
+            User user = new User(nameField.getText(), passwordField.getText());
+            printer.print(Serializer.serialize(new ServerMessage().setUser(user).setServerToken("check_user")));
+            if(MessageReceiver.scan().isRightUser())
+                SwingUtilities.invokeLater(() -> new MainWindow(provider, add, history, delete, show));
         });
         submitButton.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
-        JButton registerButton = new JButton("register");
+        JButton registerButton = new JButton("Register");
         registerButton.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
         registerButton.addActionListener(x -> {
             User user = new User(nameField.getText(), passwordField.getText());
             printer.print(Serializer.serialize(new ServerMessage().setUser(user).setServerToken("add_user")));
-            SwingUtilities.invokeLater(() -> new MainWindow(provider, add, history, delete));
+            SwingUtilities.invokeLater(() -> new MainWindow(provider, add, history, delete, show));
         });
         panel.add(nameField);
         panel.add(passwordField);

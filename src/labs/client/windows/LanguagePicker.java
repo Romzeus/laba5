@@ -8,7 +8,7 @@ public class LanguagePicker extends JFrame {
     private JComboBox comboBox;
     public LanguagePicker() {
         super("pick_language");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         String[] languages = {"ru", "de", "es", "lt"};
         comboBox = new JComboBox(languages);
         comboBox.addActionListener(x -> {

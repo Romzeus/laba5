@@ -66,7 +66,7 @@ public class ClientApp {
             initIO();
             initCommands();
             SwingUtilities.invokeLater(() -> new RegisterWindow(Sender::print, argumentProvider, invoker.getCommands().get("add"),
-                    invoker.getCommands().get("history"), invoker.getCommands().get("remove")));
+                    invoker.getCommands().get("history"), invoker.getCommands().get("remove"), invoker.getCommands().get("show")));
         }
     }
 }

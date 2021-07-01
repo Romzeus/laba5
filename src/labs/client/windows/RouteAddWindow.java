@@ -19,7 +19,7 @@ public class RouteAddWindow extends JFrame {
     private final JTextField locYCor = new JTextField(15);
     public RouteAddWindow(ArgumentProvider<String> provider, Executable add) {
         super("add_route");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         JPanel pane = new JPanel();
         pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
         name.setText("name");
@@ -29,8 +29,8 @@ public class RouteAddWindow extends JFrame {
         locName.setText("location_name");
         locXCor.setText("location_x");
         locYCor.setText("location_y");
-        JButton submitButton = new JButton("submit");
-        submitButton.setText("submit");
+        JButton submitButton = new JButton();
+        submitButton.setText("Submit");
         submitButton.addActionListener(x -> {
             String[] arguments = {name.getText(), xCor.getText(), yCor.getText(), distance.getText(), locName.getText(),
                     locXCor.getText(), locYCor.getText()};

@@ -9,12 +9,12 @@ import java.util.Deque;
 
 public class DeleteIdWindow extends JFrame {
     public DeleteIdWindow(Executable delete, ArgumentProvider<String> provider) {
-        super("delete_id");
+        super("Delete_by_id");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         JTextField id = new JTextField("id", 10);
-        JButton submitButton = new JButton("submit");
+        JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(x -> {
             Deque<String> argument = new ArrayDeque<String>();
             argument.push(id.getText());

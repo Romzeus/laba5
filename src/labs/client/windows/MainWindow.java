@@ -14,18 +14,23 @@ public class MainWindow extends JFrame {
     private Executable add;
     private Executable history;
     private Executable delete;
-    public MainWindow(ArgumentProvider<String> provider, Executable add, Executable history, Executable delete) {
-        super("main_window");
+    private Executable show;
+    public MainWindow(ArgumentProvider<String> provider, Executable add, Executable history, Executable delete, Executable show) {
+        super("MainWindow");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         String[][] data = {{" ", " ", " ", " ", " ", " ", " ", " "}};
+        this.add = add;
+        this.history = history;
+        this.delete = delete;
+        this.show = show;
         initializeTable(data);
         scrollBar = new JScrollPane(table);
         table.setFillsViewportHeight(true);
         table.setVisible(true);
         scrollBar.setVisible(true);
-        String[] actionList = {"add", "history", "delete_by_id", "switch_language"};
+        String[] actionList = {"Add", "History", "Delete", "switch_language"};
         actions = new JComboBox(actionList);
-        performAction = new JButton("submit");
+        performAction = new JButton("Submit");
         performAction.addActionListener(e -> {
             switch (actions.getSelectedIndex()) {
                 case 0:
@@ -57,8 +62,9 @@ public class MainWindow extends JFrame {
         this.setVisible(true);
     }
     public void initializeTable(String[][] data) {
-        String[] columnNames = {"NAME", "TIME", "DISTANCE", "XCOORDINATES", "YCOORDINATES", "LOCATIONNAME", "XLOCCOOR,",
+        String[] columnNames = {"ID", "NAME", "TIME", "DISTANCE", "XCOORDINATES", "YCOORDINATES", "LOCATIONNAME", "XLOCCOOR,",
                 "YLOCCOOR"};
+        show.execute();
         String[][] tableData = MessageReceiver.scan().getData();/*{{" ", " ", " ", " ", " ", " ", " ", " "}};*/
         if(data.length != 0)
             tableData = data;
