@@ -12,7 +12,6 @@ import labs.client.commands.Show;
 import labs.client.commands.StartsWith;
 import labs.client.commands.UpdateId;
 import labs.client.windows.RegisterWindow;
-import labs.client.windows.TableWindow;
 import labs.commands.*;
 import labs.util.ArgumentParser;
 import labs.util.ArgumentProvider;
